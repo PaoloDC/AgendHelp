@@ -67,11 +67,20 @@ public class MainActivity extends AppCompatActivity {
         if(daEliminare.size() == 0){
             Toast.makeText(this, "Nessuna attività selezionata!", Toast.LENGTH_SHORT).show();
         } else {
-            for(Attivita a: daEliminare){ // problema qui se elimino due eventi si stoppa l'app
-                customAdapter.remove(a);
-                listaAttività.remove(a);
-                daEliminare.remove(a);// bug risolto :)
+         //   for(Attivita a: daEliminare){ // problema qui se elimino due eventi si stoppa l'app
+            //    customAdapter.remove(a);
+              //  listaAttività.remove(a);
+              //  daEliminare.remove(a);// bug risolto :)
+
+           // }
+            /*Questo funziona sempre :)*/
+            for(int k = 0;k<daEliminare.size();k++){
+                customAdapter.remove(daEliminare.get(k));
+                listaAttività.remove(daEliminare.get(k));
+                daEliminare.remove(k);
+                k=k-1; /*L'arraylist diventa minore mentre k aumenta va a finire che non controllo tutti gli elementi */
             }
+
             customAdapter.notifyDataSetChanged();
         }
     }
@@ -92,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d("DEBUG" , "CI vado");
             for(int x = 0; x<listaAttività.size();x++){
                 customAdapter.add(listaAttività.get(x));
+                
             }
             /*alla lista aggiungo il set adapter*/
             lista.setAdapter(customAdapter);
