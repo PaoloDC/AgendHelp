@@ -88,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
     public void onSaveInstanceState(Bundle savedInstanceState) {
 
         savedInstanceState.putSerializable("LISTAATTIVITA",listaAttività);
-        savedInstanceState.putSerializable("LISTADAELIMINARE",daEliminare);
         super.onSaveInstanceState(savedInstanceState);
 
     }
@@ -98,15 +97,14 @@ public class MainActivity extends AppCompatActivity {
         if(savedInstanceState!=null){
 
             listaAttività = (ArrayList<Attivita>) savedInstanceState.getSerializable("LISTAATTIVITA");
+
             Log.d("DEBUG" , "CI vado");
             for(int x = 0; x<listaAttività.size();x++){
                 customAdapter.add(listaAttività.get(x));
-                
             }
             /*alla lista aggiungo il set adapter*/
             lista.setAdapter(customAdapter);
 
-            daEliminare=(ArrayList<Attivita>) savedInstanceState.getSerializable("LISTADAELIMINARE");
         }
         super.onRestoreInstanceState(savedInstanceState);
     }
