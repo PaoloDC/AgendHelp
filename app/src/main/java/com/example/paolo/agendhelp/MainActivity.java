@@ -18,8 +18,8 @@ public class MainActivity extends AppCompatActivity {
     public static final String DEBUG = "DEBUG";
     ListView lista;
     CustomAdapter customAdapter;
-    int positionClicked;
-    ArrayList<Attivita> daEliminare;
+    ArrayList<Attivita> daEliminare =new ArrayList<>() ;
+    ArrayList<Attivita> listaAttività = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,9 @@ public class MainActivity extends AppCompatActivity {
         lista.setAdapter(customAdapter);
 
         customAdapter.add(new Attivita("Pillola","20/01/17","15:00",true,"Ogni giorno",true));
+        listaAttività.add(new Attivita("Pillola","20/01/17","15:00",true,"Ogni giorno",true));
         customAdapter.add(new Attivita("Gocce per diabete","17/01/2017","16:00",false,"Una volta",false));
+        listaAttività.add(new Attivita("Gocce per diabete","17/01/2017","16:00",false,"Una volta",false));
 
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -65,10 +67,37 @@ public class MainActivity extends AppCompatActivity {
         if(daEliminare.size() == 0){
             Toast.makeText(this, "Nessuna attività selezionata!", Toast.LENGTH_SHORT).show();
         } else {
-            for(Attivita a: daEliminare){
+            for(Attivita a: daEliminare){ // problema qui se elimino due eventi si stoppa l'app
                 customAdapter.remove(a);
+                listaAttività.remove(a);
+                daEliminare.remove(a);// bug risolto :)
             }
             customAdapter.notifyDataSetChanged();
         }
+    }
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+
+        savedInstanceState.putSerializable("LISTAATTIVITA",listaAttività);
+        savedInstanceState.putSerializable("LISTADAELIMINARE",daEliminare);
+        super.onSaveInstanceState(savedInstanceState);
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        if(savedInstanceState!=null){
+
+            listaAttività = (ArrayList<Attivita>) savedInstanceState.getSerializable("LISTAATTIVITA");
+            Log.d("DEBUG" , "CI vado");
+            for(int x = 0; x<listaAttività.size();x++){
+                customAdapter.add(listaAttività.get(x));
+            }
+            /*alla lista aggiungo il set adapter*/
+            lista.setAdapter(customAdapter);
+
+            daEliminare=(ArrayList<Attivita>) savedInstanceState.getSerializable("LISTADAELIMINARE");
+        }
+        super.onRestoreInstanceState(savedInstanceState);
     }
 }
