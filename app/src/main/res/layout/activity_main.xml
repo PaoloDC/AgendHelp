@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.paolo.agendhelp.MainActivity">
+    tools:context="com.example.paolo.agendhelp.MainActivity"
+    android:background="@drawable/sfondo"
+    >
 
     <RelativeLayout
         android:id="@+id/relativeLayout1"
@@ -17,28 +19,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="20dp"
             android:text="Lista delle attività"
             android:textColor="#000000"
             android:textSize="25dp" />
 
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_toRightOf="@id/textTitle"
-            android:src="@drawable/attivita2" />
 
     </RelativeLayout>
     <ListView
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:id="@+id/mialista"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="350dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_below="@id/relativeLayout1"
         />
 
     <LinearLayout
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:id="@+id/bottoni"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
