@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">AgendHelp</string>
-    <string name="testo_esempio">esempio</string>
+    <string name="testo_esempio">---</string>
 
     <dimen name="dimensione_testo_bottoni_inserimento">15sp</dimen>
     <dimen name="dimensione_testo_inserisci">25sp</dimen>

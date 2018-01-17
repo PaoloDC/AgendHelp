@@ -16,7 +16,8 @@ public class Attivita implements Serializable {
     private String ora;
     private Boolean importante;
     private String ripetizione;
-    Boolean suoneria;
+    private Boolean suoneria;
+
     public Attivita (String nome, String data, String ora, Boolean importante,String ripetizione,Boolean suoneria){
     this.nome=nome;
     this.data=data;
@@ -26,51 +27,41 @@ public class Attivita implements Serializable {
     this.suoneria=suoneria;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public String getNome() {
         return nome;
-    }
-
-    public void setData(String data) {
-        this.data = data;
     }
 
     public String getData() {
         return data;
     }
 
-    public void setOra(String ora) {
-        this.ora = ora;
-    }
-
     public String getOra() {
         return ora;
     }
 
-    public void setAlta(Boolean alta) {
-        this.importante=importante;
-    }
-
-    public Boolean getAlta() {
+    public Boolean getImportante() {
         return importante;
-    }
-
-    public void setRipetizione(String ripetizione) {
-        this.ripetizione = ripetizione;
     }
 
     public String getRipetizione() {
         return ripetizione;
     }
 
-    public void setSuoneria(Boolean suoneria) {
-        this.suoneria = suoneria;
-    }
-
     public Boolean getSuoneria() {
         return suoneria;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof  Attivita){
+            Attivita a = (Attivita) obj;
+            return a.getImportante().equals(importante) &&
+                    a.getSuoneria().equals(suoneria) &&
+                    a.getData().equals(data) &&
+                    a.getNome().equals(nome) &&
+                    a.getOra().equals(ora) &&
+                    a.getRipetizione().equals(ripetizione);
+        }
+        return false;
     }
 }

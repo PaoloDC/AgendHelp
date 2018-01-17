@@ -28,12 +28,6 @@
             android:layout_toRightOf="@id/textTitle"
             android:src="@drawable/attivita2" />
 
-        <Button
-            android:layout_alignParentRight="true"
-            android:text="Ins"
-            android:onClick="clickButtonInserisci"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
     </RelativeLayout>
 
 
