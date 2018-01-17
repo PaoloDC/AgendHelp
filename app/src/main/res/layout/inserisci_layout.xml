@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:onClick="clickBackButton"
+            android:onClick="clickBack"
             android:text="back"
             android:textSize="@dimen/dimensione_testo_inserisci" />
 
@@ -28,8 +28,8 @@
 
         <EditText
             android:id="@+id/etNomeAttivita"
-            android:textColor="#7c7c7c"
-            android:textColorHint="#FFFFFF"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#7c7c7c"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ricordami di...."
@@ -52,6 +52,7 @@
 
             <Button
                 android:text="Data"
+                android:onClick="clickData"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -86,6 +87,7 @@
             android:orientation="horizontal">
 
             <Button
+                android:onClick="clickOra"
                 android:text="Ora"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -120,6 +122,7 @@
             android:orientation="horizontal">
 
             <Button
+                android:onClick="clickRipetizione"
                 android:text="REP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -154,6 +157,7 @@
             android:orientation="horizontal">
 
             <Button
+                android:onClick="clickImportanza"
                 android:text="IMP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -189,6 +193,7 @@
             android:orientation="horizontal">
 
             <Button
+                android:onClick="clickSuoneria"
                 android:text="Suon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -224,6 +229,7 @@
             android:orientation="horizontal">
 
             <Button
+                android:onClick="clickAvviso"
                 android:text="AVV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
