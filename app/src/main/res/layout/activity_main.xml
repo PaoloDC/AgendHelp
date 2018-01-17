@@ -25,7 +25,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_centerInParent="true"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="65dp"
             android:src="@drawable/attivita2" />
 
         <Button
@@ -35,14 +35,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>
-
     <ListView
         android:id="@+id/mialista"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/relativeLayout1"/>
+        android:layout_width="500dp"
+        android:layout_height="350dp"
+        android:layout_below="@id/relativeLayout1"
+        />
 
     <LinearLayout
+        android:id="@+id/bottoni"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -58,7 +59,9 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Elimina  attività" />
+            android:text="Elimina  attività"
+            android:onClick="onClickElimina"
+            />
 
     </LinearLayout>
 

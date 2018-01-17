@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.List;
@@ -38,12 +39,14 @@ public class CustomAdapter extends ArrayAdapter<Attivita> {
 
         TextView nome;
         TextView data;
+        CheckBox checkBox;
 
         nome = v.findViewById(R.id.elemento_nome);
         data =v.findViewById(R.id.elemento_ora);
+        checkBox=v.findViewById(R.id.checkElimina);
 
         nome.setText(a.getNome());
-        data.setText(a.getData());
+        data.setText(a.getOra());
 
 
         return v;
