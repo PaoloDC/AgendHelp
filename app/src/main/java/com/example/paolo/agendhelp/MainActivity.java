@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
@@ -16,8 +17,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     ListView lista;
     CustomAdapter customAdapter;
-    Boolean elimina= false;
-    CheckBox checkBoxElimina;
+    int positionClicked;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         customAdapter = new CustomAdapter(this, R.layout.elemento_lista, new ArrayList<Attivita>());
 
         lista.setAdapter(customAdapter);
-        for(int x =0;x<7;x++){
+        for(int x =0;x<4;x++){
             Attivita a  = new Attivita("Pillola","20/11/17","15:00",true,"Ogni giorni",true);
 
             customAdapter.add(a);
@@ -64,7 +64,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             });*/
 
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                positionClicked=position;
+                Log.d("DEBUG","Posizione= "+ positionClicked);
 
+            }
+        });
 
 
     }
@@ -73,8 +80,10 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this,InserisciActivity.class);
         startActivity(i);
     }
-    public void  onClickElimina(View v){
-
-
+    public void onClickElimina(View view){
+            final Attivita a = (Attivita) customAdapter.getItem(positionClicked);
+        Log.d("DEBUG","Posizione rimossa =  "+ positionClicked);
+            customAdapter.remove(a);
+            customAdapter.notifyDataSetChanged();
     }
 }

@@ -18,7 +18,8 @@ import java.util.List;
 public class CustomAdapter extends ArrayAdapter<Attivita> {
     private int resource;
     private LayoutInflater inflater;
-
+    int positioncb;
+    Boolean checkBoxIsChecked;
 
     public CustomAdapter(Context context, int resourceId, List<Attivita> objects) {
         super(context, resourceId, objects);
@@ -44,6 +45,9 @@ public class CustomAdapter extends ArrayAdapter<Attivita> {
         nome = v.findViewById(R.id.elemento_nome);
         data =v.findViewById(R.id.elemento_ora);
         checkBox=v.findViewById(R.id.checkElimina);
+
+
+
 
         nome.setText(a.getNome());
         data.setText(a.getOra());
