@@ -355,7 +355,6 @@ public class InserisciActivity extends AppCompatActivity {
     }
 
     private void attivaAllarme(String messaggio){
-        MainActivity.tvProva.setText("Allarme attivato");
 
         Intent intent = new Intent(this,Allarme.class);
         intent.putExtra(Allarme.MESSAGGIO,messaggio);
