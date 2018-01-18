@@ -25,7 +25,6 @@ public class Allarme extends Activity {
     }
 
     public void clickEsci(View view) {
-        MainActivity.tvProva.setText("No Alarm");
         finish();
     }
 
