@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -20,11 +21,14 @@ public class MainActivity extends AppCompatActivity {
     CustomAdapter customAdapter;
     int positionClicked;
     ArrayList<Attivita> daEliminare;
+    static TextView tvProva;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        tvProva = findViewById(R.id.tvProva);
 
         daEliminare = new ArrayList<>();
 

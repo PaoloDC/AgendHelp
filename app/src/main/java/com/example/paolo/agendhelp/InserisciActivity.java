@@ -1,10 +1,14 @@
 package com.example.paolo.agendhelp;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -28,10 +32,18 @@ public class InserisciActivity extends AppCompatActivity {
     //costanti
     public static final String DEBUG = "DEBUG";
     final String[] scelteRipetizione = {
+            "Nessuna ripetizione",
             "Una volta al giorno",
             "Due volte al giorno",
             "Una volta la settimana",
             "Una volta al mese"
+    };
+    final String[] scelteAvviso = {
+            "All'ora esatta",
+            "10 minuti prima",
+            "5 minuti prima",
+            "5 minuti dopo",
+            "10 minuti dopo"
     };
 
     final String testo_esempio = "---";
@@ -46,7 +58,6 @@ public class InserisciActivity extends AppCompatActivity {
     private TextView tvSuoneria;
     private EditText etNomeAttivita;
 
-    private String ora;
     private String ripetizione;
     private boolean importanza;
     private boolean suoneria;
@@ -66,8 +77,15 @@ public class InserisciActivity extends AppCompatActivity {
         tvSuoneria = findViewById(R.id.tvSuoneria);
         etNomeAttivita = findViewById(R.id.etNomeAttivita);
 
+        suoneria = false;
+        importanza = false;
+        ripetizione = scelteRipetizione[0];
+        avviso = scelteAvviso[0];
 
-
+        tvRipetizione.setText(scelteRipetizione[0]);
+        tvImportanza.setText("Bassa importanza");
+        tvSuoneria.setText("Suoneria disattivata");
+        tvAvviso.setText(scelteAvviso[0]);
     }
 
     public void clickBack(View view) {
@@ -166,12 +184,12 @@ public class InserisciActivity extends AppCompatActivity {
             Log.d(DEBUG,"Ora Attuale: " + oraAttuale + " : " + minutoAttuale
                     + "\nOra Scelta: " + oraSelezionata + " : " + minutoSelezionato);
 
-            if(oraSelezionata > oraAttuale) {
+            if(oraAttuale > oraSelezionata) {
                 Toast.makeText(InserisciActivity.this,
                         "L'ora selezionata è antecedente all'ora attuale",
                         Toast.LENGTH_SHORT).show();
                 return false;
-            } else if (minutoAttuale > minutoSelezionato){
+            } else if (oraAttuale > oraSelezionata && minutoAttuale > minutoSelezionato){
                 Toast.makeText(InserisciActivity.this,
                         "L'ora selezionata è antecedente all'ora attuale",
                         Toast.LENGTH_SHORT).show();
@@ -186,7 +204,7 @@ public class InserisciActivity extends AppCompatActivity {
         // Creating and Building the Dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Ripetizione");
-        builder.setSingleChoiceItems(scelteRipetizione, 1, new DialogInterface.OnClickListener() {
+        builder.setSingleChoiceItems(scelteRipetizione, 0, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                 ripetizione = scelteRipetizione[item];
                 Log.d(DEBUG, "Scelta: " + scelteRipetizione[item]);
@@ -214,12 +232,12 @@ public class InserisciActivity extends AppCompatActivity {
         // Creating and Building the Dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Importanza");
-        builder.setSingleChoiceItems(scelte, 1, new DialogInterface.OnClickListener() {
+        builder.setSingleChoiceItems(scelte, 0, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                 if (item == 0)
-                    importanza = true;
-                else
                     importanza = false;
+                else
+                    importanza = true;
 
             }
         });
@@ -246,12 +264,12 @@ public class InserisciActivity extends AppCompatActivity {
         // Creating and Building the Dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Suoneria");
-        builder.setSingleChoiceItems(scelte, 1, new DialogInterface.OnClickListener() {
+        builder.setSingleChoiceItems(scelte, 0, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                 if (item == 0)
-                    suoneria = true;
-                else
                     suoneria = false;
+                else
+                    suoneria = true;
             }
         });
 
@@ -270,9 +288,86 @@ public class InserisciActivity extends AppCompatActivity {
 
     public void clickAvviso(View view) {
 
+
+        // Creating and Building the Dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Avviso");
+        builder.setSingleChoiceItems(scelteAvviso, 0, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                avviso = scelteAvviso[item];
+                Log.d(DEBUG,"Avviso: " + scelteAvviso[item]);
+            }
+        });
+
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                tvAvviso.setText(avviso);
+            }
+        });
+
+        builder.create().show();
     }
 
     public void clickInserisciAttivita(View view) {
+        final String nome = etNomeAttivita.getText().toString();
+        if(nome.equals("")){
+            Toast.makeText(this, "Inserisci un nome per l'attività", Toast.LENGTH_SHORT).show();
+            return;
+        } else if (tvData.equals(testo_esempio)){
+            Toast.makeText(this, "Inserisci una data per l'attività", Toast.LENGTH_SHORT).show();
+            return;
+        } else if (tvData.equals(testo_esempio)){
+            Toast.makeText(this, "Inserisci un'ora per l'attività", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String stringaImportanza = "Bassa";
+        if(importanza) {
+            stringaImportanza = "Alta";
+        }
+        String stringaSuoneria = "Disattivata";
+        if(suoneria){
+            stringaSuoneria = "Attivata";
+        }
+
+        String messaggio = "Nome:\t" + nome
+                + "\nData: " + tvData.getText().toString()
+                + "\nOra: " + tvOra.getText().toString()
+                + "\nRipetizione: " + ripetizione
+                + "\nImportanza: " + stringaImportanza
+                + "\nSuoneria: " + stringaSuoneria
+                + "\nAvviso: " + avviso;
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Riepilogo Inserimento");
+        builder.setMessage(messaggio);
+        builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                attivaAllarme(nome);
+                finish();
+            }
+        }) ;
+
+        builder.setNegativeButton("No",null);
+        builder.create().show();
+    }
+
+    private void attivaAllarme(String messaggio){
+        MainActivity.tvProva.setText("Allarme attivato");
+
+        Intent intent = new Intent(this,Allarme.class);
+        intent.putExtra(Allarme.MESSAGGIO,messaggio);
+        Log.d(DEBUG,"msg: "+ messaggio);
+
+        intent.setAction(Intent.ACTION_MAIN);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+
+        PendingIntent pi = PendingIntent.getActivity(this,0,intent,0);
+
+        AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+        am.set(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime()+2000,pi);
 
     }
 }

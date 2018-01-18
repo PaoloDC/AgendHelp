@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".InserisciActivity"/>
+        <activity android:name=".Allarme" android:noHistory="true"/>
     </application>
 
 </manifest>

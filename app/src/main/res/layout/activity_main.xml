@@ -28,6 +28,13 @@
             android:layout_toRightOf="@id/textTitle"
             android:src="@drawable/attivita2" />
 
+        <TextView
+            android:id="@+id/tvProva"
+            android:text="Prova"
+            android:textSize="25sp"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </RelativeLayout>
     <ListView
         android:layout_marginTop="15dp"
