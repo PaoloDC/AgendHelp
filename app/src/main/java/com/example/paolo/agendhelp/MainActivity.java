@@ -9,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -19,16 +18,13 @@ public class MainActivity extends AppCompatActivity {
     public static final String DEBUG = "DEBUG";
     ListView lista;
     CustomAdapter customAdapter;
-    int positionClicked;
-    ArrayList<Attivita> daEliminare;
-    static TextView tvProva;
+    ArrayList<Attivita> daEliminare =new ArrayList<>() ;
+    ArrayList<Attivita> listaAttività = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        tvProva = findViewById(R.id.tvProva);
 
         daEliminare = new ArrayList<>();
 
@@ -37,7 +33,9 @@ public class MainActivity extends AppCompatActivity {
         lista.setAdapter(customAdapter);
 
         customAdapter.add(new Attivita("Pillola","20/01/17","15:00",true,"Ogni giorno",true));
+        listaAttività.add(new Attivita("Pillola","20/01/17","15:00",true,"Ogni giorno",true));
         customAdapter.add(new Attivita("Gocce per diabete","17/01/2017","16:00",false,"Una volta",false));
+        listaAttività.add(new Attivita("Gocce per diabete","17/01/2017","16:00",false,"Una volta",false));
 
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -69,10 +67,45 @@ public class MainActivity extends AppCompatActivity {
         if(daEliminare.size() == 0){
             Toast.makeText(this, "Nessuna attività selezionata!", Toast.LENGTH_SHORT).show();
         } else {
-            for(Attivita a: daEliminare){
-                customAdapter.remove(a);
+         //   for(Attivita a: daEliminare){ // problema qui se elimino due eventi si stoppa l'app
+            //    customAdapter.remove(a);
+              //  listaAttività.remove(a);
+              //  daEliminare.remove(a);// bug risolto :)
+
+           // }
+            /*Questo funziona sempre :)*/
+            for(int k = 0;k<daEliminare.size();k++){
+                customAdapter.remove(daEliminare.get(k));
+                listaAttività.remove(daEliminare.get(k));
+                daEliminare.remove(k);
+                k=k-1; /*L'arraylist diventa minore mentre k aumenta va a finire che non controllo tutti gli elementi */
             }
+
             customAdapter.notifyDataSetChanged();
         }
+    }
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+
+        savedInstanceState.putSerializable("LISTAATTIVITA",listaAttività);
+        super.onSaveInstanceState(savedInstanceState);
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        if(savedInstanceState!=null){
+
+            listaAttività = (ArrayList<Attivita>) savedInstanceState.getSerializable("LISTAATTIVITA");
+
+            Log.d("DEBUG" , "CI vado");
+            for(int x = 0; x<listaAttività.size();x++){
+                customAdapter.add(listaAttività.get(x));
+            }
+            /*alla lista aggiungo il set adapter*/
+            lista.setAdapter(customAdapter);
+
+        }
+        super.onRestoreInstanceState(savedInstanceState);
     }
 }
