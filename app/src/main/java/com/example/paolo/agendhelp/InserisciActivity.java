@@ -64,6 +64,10 @@ public class InserisciActivity extends AppCompatActivity {
     private String avviso;
     private boolean selezionataDataOdierna;
 
+
+    String stringaData;
+    String stringaOra;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,9 +107,9 @@ public class InserisciActivity extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker datePicker, int anno, int mese, int giorno) {
                         mese++;
-                        String stringaData = giorno + "/" + mese + "/" + anno;
+                        stringaData = anno +"/" + mese + "/"+giorno ;
 
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY);
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd", Locale.ITALY);
                         Date dataScelta = null;
                         try {
                             dataScelta = sdf.parse(stringaData);
@@ -152,7 +156,7 @@ public class InserisciActivity extends AppCompatActivity {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int oraSelezionata, int minutoSelezionato) {
 
-                        String stringaOra = oraSelezionata + ":" + minutoSelezionato;
+                         stringaOra = oraSelezionata + ":" + minutoSelezionato;
                         if(checkSelezioneOrario(stringaOra)){
                             tvOra.setText(stringaOra);
                         } else {
@@ -366,7 +370,83 @@ public class InserisciActivity extends AppCompatActivity {
         PendingIntent pi = PendingIntent.getActivity(this,0,intent,0);
 
         AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-        am.set(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime()+2000,pi);
+        am.set(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime()+10000000,pi);
+        Log.d(DEBUG,"msg: millisecondiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii "+ getMilliSecondi());
 
     }
+    public long getMilliSecondi(){
+        long millisDiff = 0;
+
+                try {
+                    Calendar c = Calendar.getInstance();
+                  //  System.out.println(c.getTime());	/* Rappresentazione come stringa in base al tuo Locale */
+                 //   System.out.println(c.get(Calendar.YEAR)); /* Ottieni l'anno */
+                  //  System.out.println("mese"+c.get((Calendar.MONTH))); /* Ottieni il mese */
+                 //   System.out.println(c.get(Calendar.DAY_OF_MONTH)); /* Ottieni il giorno */
+                 //   System.out.println(c.get(Calendar.HOUR_OF_DAY));
+                 //   System.out.println(c.get(Calendar.MINUTE));
+
+                    SimpleDateFormat fmt = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+
+                    int anno = c.get(Calendar.YEAR);
+                    int mese = c.get(Calendar.MONTH)+1;
+                    int giorno = c.get(Calendar.DAY_OF_MONTH);
+                    int ora= c.get(Calendar.HOUR_OF_DAY)+1;
+                    int minuti = c.get(Calendar.MINUTE);
+                    int secondi =c.get(Calendar.SECOND) ;
+
+
+                    String strDate1 = ""+anno+"/"+mese+"/"+giorno+" "+ora+":"+minuti+":"+secondi;
+                    Log.d(DEBUG,"msg: Stringaaaa dataaaaaaa111111 "+ strDate1);
+
+                    String strDate2 = stringaData+" "+stringaOra +":"+0+0;
+                    Log.d(DEBUG,"msg: Stringaaaa dataaaaaaa2222 "+ strDate2);
+
+
+
+
+
+                    fmt.setLenient(false);
+
+// Parses the two strings.
+
+                    Date d1 = fmt.parse(strDate1);
+
+                    Date d2 = fmt.parse(strDate2);
+
+// Calculates the difference in milliseconds.
+
+                     millisDiff = d2.getTime() - d1.getTime();
+                    Log.d(DEBUG,"msg: Stringaaaa dataaaaaaa "+ strDate2);
+
+// Calculates days/hours/minutes/seconds.
+
+                    int seconds = (int) (millisDiff / 1000 % 60);
+
+                    int minutes = (int) (millisDiff / 60000 % 60);
+
+                    int hours = (int) (millisDiff / 3600000 % 24);
+
+                    int days = (int) (millisDiff / 86400000);
+
+
+
+              /*      System.out.println("Between " + strDate1 + " and " + strDate2 + " there are:");
+
+                    System.out.print(days + " days, ");
+
+                    System.out.print(hours + " hours, ");
+
+                    System.out.print(minutes + " minutes, ");
+
+                    System.out.println(seconds + " seconds");*/
+
+                } catch (Exception e) {
+
+                    System.err.println(e);
+
+                }
+            return millisDiff;
+            }
+
 }

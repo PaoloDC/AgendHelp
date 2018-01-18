@@ -4,4 +4,5 @@
 
     <dimen name="dimensione_testo_bottoni_inserimento">20sp</dimen>
     <dimen name="dimensione_testo_inserisci">25sp</dimen>
+    <dimen name="dimensioniimmagini">60dp</dimen>
 </resources>
