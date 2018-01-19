@@ -360,18 +360,20 @@ public class InserisciActivity extends AppCompatActivity {
 
     private void attivaAllarme(String messaggio){
 
-        Intent intent = new Intent(this,Allarme.class);
-        intent.putExtra(Allarme.MESSAGGIO,messaggio);
-        Log.d(DEBUG,"msg: "+ messaggio);
 
-        intent.setAction(Intent.ACTION_MAIN);
-        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-
-        PendingIntent pi = PendingIntent.getActivity(this,0,intent,0);
-
-        AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-        am.set(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime()+10000000,pi);
+        /*Funziona*/
+       Intent i = new Intent(getApplicationContext(),Allarme.class);
+        i.putExtra(Allarme.MESSAGGIO,messaggio);
+        i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        /*intent in attesa*/
+        PendingIntent pi = PendingIntent.getActivity(getApplicationContext(),0,i,0);
+        AlarmManager am = (AlarmManager) this.getSystemService(this.ALARM_SERVICE);/*manaager alrm*/
+        am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                SystemClock.elapsedRealtime()+getMilliSecondi(),pi);
         Log.d(DEBUG,"msg: millisecondiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii "+ getMilliSecondi());
+
+
+
 
     }
     public long getMilliSecondi(){
