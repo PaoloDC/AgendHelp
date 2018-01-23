@@ -39,7 +39,7 @@
         android:layout_marginTop="10dp"
         android:id="@+id/mialista"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="260dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_below="@id/relativeLayout1"
@@ -48,35 +48,37 @@
     <LinearLayout
         android:layout_marginTop="15dp"
         android:id="@+id/bottoni"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
         android:layout_below="@id/mialista"
         android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
         android:orientation="vertical">
 
         <Button
             android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            android:layout_height="33dp"
             android:text="Aggiungi attività"
             android:onClick="clickButtonInserisci"
             android:background="#0973de"/>
 
         <Button
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="3dp"
             android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            android:layout_height="33dp"
             android:text="Elimina  attività"
             android:onClick="onClickElimina"
-            android:background="#ef7a04"
+            android:background="#f21c00"
             />
 
         <Button
             android:text="ESCI"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="3dp"
             android:onClick="clickButtonEsci"
             android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:background="#f21c00"/>
+            android:layout_height="33dp"
+            android:background="#ef7a04"
+            />
     </LinearLayout>
 
 

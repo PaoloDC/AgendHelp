@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private CustomAdapter customAdapter;
     private ArrayList<Attivita> daEliminare;
     public static String nomeAccount;
-    TextView nome ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +34,9 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
             finish();
         } else {
-            nome = findViewById(R.id.textNome);
+
             Toast.makeText(this, "Ciao " + nomeAccount, Toast.LENGTH_SHORT).show();
-            nome.setText(""+nomeAccount);
+
         }
 
 
@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
                 listaAttivita.add(customAdapter.getItem(i));
             }
 
+            listaAttivita.add(new Attivita("Pillola", "20/01/17", "15:00", true, "Ogni giorno", true));
+            listaAttivita.add(new Attivita("Gocce per diabete", "17/01/2017", "16:00", false, "Una volta", false));
             listaAttivita.add(new Attivita("Pillola", "20/01/17", "15:00", true, "Ogni giorno", true));
             listaAttivita.add(new Attivita("Gocce per diabete", "17/01/2017", "16:00", false, "Una volta", false));
         } else {

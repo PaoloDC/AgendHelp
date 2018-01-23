@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/sfondo">
+    >
 
     <LinearLayout
         android:padding="10dp"
@@ -261,11 +261,11 @@
     </LinearLayout>
 <LinearLayout
     android:layout_below="@id/gridLayout"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="265dp"
+    android:layout_height="50dp"
     android:layout_centerInParent="true"
     android:orientation="horizontal"
-    android:layout_marginTop="15dp">
+    android:layout_marginTop="5dp">
     <Button
         android:onClick="clickInserisciAttivita"
         android:layout_width="135dp"
@@ -274,7 +274,7 @@
         android:layout_centerHorizontal="true"
         android:text="Inserisci"
         android:textSize="@dimen/dimensione_testo_inserisci"
-        android:background="#0e52e3"/>
+        android:background="#0973de"/>
     <Button
         android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
@@ -284,7 +284,7 @@
         android:onClick="clickBack"
         android:text="back"
         android:textSize="@dimen/dimensione_testo_inserisci"
-        android:background="#fcc200"/>
+        android:background="#ef7a04"/>
 
 </LinearLayout>
 

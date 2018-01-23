@@ -230,7 +230,7 @@
             android:layout_centerHorizontal="true"
             android:text="Inserisci"
             android:textSize="@dimen/dimensione_testo_inserisci"
-            android:background="#0e52e3"/>
+            android:background="#0973de"/>
         <Button
             android:layout_marginTop="5dp"
             android:layout_width="135dp"
@@ -239,7 +239,7 @@
             android:onClick="clickBack"
             android:text="back"
             android:textSize="@dimen/dimensione_testo_inserisci"
-            android:background="#fcc200"/>
+            android:background="#ef7a04"/>
     </LinearLayout>
 
 
