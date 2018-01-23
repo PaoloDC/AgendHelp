@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.File;
+import java.util.ArrayList;
+
 /**
  * Created by Paolo2 on 23/01/2018.
  */
@@ -49,4 +52,23 @@ public class LoginActivity extends Activity {
         Intent i = new Intent(this, RegistrazioneActivity.class);
         startActivity(i);
     }
+
+    public void clickEliminaFileImpostazioni(View view){
+
+        File parentDirectory = getFilesDir();
+
+        ArrayList<File> inFiles = new ArrayList<File>();
+        File[] files = parentDirectory.listFiles();
+
+        if (files.length == 0)
+            Toast.makeText(this, "NESSUN FILE PRESENTE!!!", Toast.LENGTH_SHORT).show();
+        else {
+            for (File file : files) {
+                System.out.println("FILE: " + file);
+                if(file.getName().equals(GestoreFile.FILENAME))
+                    file.delete();
+            }
+        }
+    }
+
 }

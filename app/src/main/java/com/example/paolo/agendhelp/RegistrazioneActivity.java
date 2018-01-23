@@ -43,7 +43,7 @@ public class RegistrazioneActivity extends Activity {
         } else if(password.equals("")) {
             Toast.makeText(this, "Il campo password è vuoto", Toast.LENGTH_SHORT).show();
         } else {
-            GestoreFile.salvaImpostazioniUtente(this,nome,cognome,telefono,password);
+            GestoreFile.salvaImpostazioniUtente(this,nome,cognome,telefono,password,"no");
             Toast.makeText(this, "Registrazione avvenuta correttamente", Toast.LENGTH_SHORT).show();
             Intent i = new Intent(this,LoginActivity.class);
             startActivity(i);

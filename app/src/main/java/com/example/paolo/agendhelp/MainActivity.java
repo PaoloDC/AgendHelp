@@ -27,11 +27,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        checkLogin();
+        boolean check = GestoreFile.checkAccountEsistente(this);
+        if(!check) {
+            Intent i = new Intent(this,LoginActivity.class);
+            startActivity(i);
+            finish();
+        } else {
+            Toast.makeText(this, "Ciao " + nomeAccount, Toast.LENGTH_SHORT).show();
+        }
+
+
 
         daEliminare = new ArrayList<>();
 
-        lista= findViewById(R.id.mialista);
+        lista = findViewById(R.id.mialista);
         customAdapter = new CustomAdapter(this, R.layout.elemento_lista, new ArrayList<Attivita>());
         lista.setAdapter(customAdapter);
 
@@ -112,15 +121,9 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(savedInstanceState);
     }
 
-    private void checkLogin(){
-
-
-
-        if (nomeAccount == null || nomeAccount.equals("")) {
-            Intent i = new Intent(this,LoginActivity.class);
-            startActivity(i);
-            finish();
-        }
+    public void clickButtonEsci(View view) {
+        Intent i = new Intent(this,LoginActivity.class);
+        startActivity(i);
+        finish();
     }
-
 }

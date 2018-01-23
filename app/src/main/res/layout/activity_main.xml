@@ -59,6 +59,12 @@
             android:onClick="onClickElimina"
             android:background="#ef7a04"
             />
+
+        <Button
+            android:text="ESCI"
+            android:onClick="clickButtonEsci"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 

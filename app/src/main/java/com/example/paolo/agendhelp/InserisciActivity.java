@@ -1,5 +1,6 @@
 package com.example.paolo.agendhelp;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -352,6 +353,7 @@ public class InserisciActivity extends AppCompatActivity {
                 attivaAllarme(nome);
                 getIntent().putExtra("ATTIVITA",
                         new Attivita(nome,tvData.getText().toString(),tvOra.getText().toString(),importanza,ripetizione,suoneria));
+                setResult(Activity.RESULT_OK,getIntent());
                 finish();
             }
         }) ;
@@ -371,6 +373,7 @@ public class InserisciActivity extends AppCompatActivity {
         am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
                 SystemClock.elapsedRealtime()+getMilliSecondi(),pi);
         Log.d(DEBUG,"msg: millisecondiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii "+ getMilliSecondi());
+
 
     }
     public long getMilliSecondi(){

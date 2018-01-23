@@ -9,8 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 /**
  * Created by Paolo2 on 23/01/2018.
@@ -20,62 +19,19 @@ public class GestoreFile {
 
     public static final String FILENAME = "utente.dat";
 
-    public static void salvaImpostazioniUtente(String nome, String cognome, String telefono, String password) {
-
-            try {
-                File file = new File(FILENAME);
-                if (file.exists()) {
-                    file.delete();
-                }
-            file.createNewFile();
-
-            FileOutputStream fout = new FileOutputStream(file);
-            ObjectOutputStream out = new ObjectOutputStream(fout);
-            out.writeObject(nome);
-            out.writeObject(cognome);
-            out.writeObject(telefono);
-            out.writeObject(password);
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-    }
-
-    public static boolean login(String tel,String pass){
-        try {
-            File file = new File(FILENAME);
-            if (file.exists()) {
-                ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
-
-                String nome = (String) in.readObject();
-                String cognome = (String) in.readObject();
-                String telefono  = (String) in.readObject();
-                String password = (String) in.readObject();
-
-                System.out.println("INSERITE: tel: "+ tel + ", pass: " + pass);
-                System.out.println("nome: " +nome + ", cognome: " +cognome
-                        + ", telefono: " +telefono + ", password: " +password);
-
-                if(tel.equals(telefono) && pass.equals(password)) {
-                    MainActivity.nomeAccount = nome + " " + cognome;
-                    return true;
-                }
-            }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public static void salvaImpostazioniUtente(Context context, String nome, String cognome, String telefono, String password) {
+    public static void salvaImpostazioniUtente
+            (Context context, String nome, String cognome, String telefono, String password,String loggato) {
 
         FileOutputStream fos = null;
         try {
             fos = context.openFileOutput(FILENAME, Context.MODE_PRIVATE);
+
+            loggato += ",";
+            nome += ",";
+            cognome += ",";
+            telefono += ",";
+
+            fos.write(loggato.getBytes());
             fos.write(nome.getBytes());
             fos.write(cognome.getBytes());
             fos.write(telefono.getBytes());
@@ -98,10 +54,46 @@ public class GestoreFile {
             String line;
             String data = "";
             while (null != (line = br.readLine())) {
-                data += line+"\n";
+                data += line;
             }
             br.close();
-            System.out.println("DATI: " + data);
+            int x = data.indexOf(",");
+            String[] dati = data.split(",");
+
+            System.out.println("DATA VALE: " +data);
+            String loggato = dati[0];
+            String nome = dati[1];
+            String cognome = dati[2];
+            String telefono = dati[3];
+            String password = dati[4];
+
+            if(tel.equals(telefono) && pass.equals(password)){
+                FileOutputStream fos = null;
+                try {
+                    fos = context.openFileOutput(FILENAME, Context.MODE_PRIVATE);
+
+                    loggato = "si,";
+                    nome += ",";
+                    cognome += ",";
+                    telefono += ",";
+
+                    fos.write(loggato.getBytes());
+                    fos.write(nome.getBytes());
+                    fos.write(cognome.getBytes());
+                    fos.write(telefono.getBytes());
+                    fos.write(password.getBytes());
+                    fos.close();
+                }
+                catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            MainActivity.nomeAccount = nome + " " + cognome;
+            System.out.println("nome account: " + MainActivity.nomeAccount);
             return true;
         }
         catch (FileNotFoundException e) {
@@ -113,4 +105,46 @@ public class GestoreFile {
         return false;
     }
 
+    public static boolean checkAccountEsistente(Context context){
+        File parentDirectory = context.getFilesDir();
+
+        ArrayList<File> inFiles = new ArrayList<File>();
+        File[] files = parentDirectory.listFiles();
+
+        if (files.length != 0) {
+            for (File file : files) {
+                if(file.getName().equals(GestoreFile.FILENAME)) {
+                    try {
+                        FileInputStream fis = context.openFileInput(FILENAME);
+                        BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+                        String line;
+                        String data = "";
+                        while (null != (line = br.readLine())) {
+                            data += line;
+                        }
+                        br.close();
+                        int x = data.indexOf(",");
+                        String[] dati = data.split(",");
+                        String loggato = dati[0];
+
+                        if(loggato.equals("si")) {
+                            String nome = dati[1];
+                            String cognome = dati[2];
+                            MainActivity.nomeAccount = nome + " " + cognome;
+                            return true;
+                        }
+                    }
+
+                    catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
 }
