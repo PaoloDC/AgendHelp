@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -30,6 +31,8 @@ import java.util.Locale;
  */
 
 public class InserisciActivity extends AppCompatActivity {
+
+    ArrayList<Attivita> listaAttivita = new ArrayList<>();
     //costanti
     public static final String DEBUG = "DEBUG";
     final String[] scelteRipetizione = {
@@ -73,6 +76,11 @@ public class InserisciActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inserisci_layout);
+
+        Intent i = getIntent();
+        listaAttivita = (ArrayList<Attivita>) i.getSerializableExtra("LISTAATTIVITA");
+
+        Log.e("ERROR"," Attivita B  = " + listaAttivita.size());
 
        // tvAvviso = findViewById(R.id.tvAvviso);
         tvData = findViewById(R.id.tvData);
@@ -315,14 +323,16 @@ public class InserisciActivity extends AppCompatActivity {
     }
 */
     public void clickInserisciAttivita(View view) {
+
+        /*Controlli inserimenti*/
         final String nome = etNomeAttivita.getText().toString();
         if(nome.equals("")){
             Toast.makeText(this, "Inserisci un nome per l'attività", Toast.LENGTH_SHORT).show();
             return;
-        } else if (tvData.equals(testo_esempio)){
+        } else if (tvData.getText().toString().equals(testo_esempio)){
             Toast.makeText(this, "Inserisci una data per l'attività", Toast.LENGTH_SHORT).show();
             return;
-        } else if (tvData.equals(testo_esempio)){
+        } else if (tvOra.getText().toString().equals(testo_esempio)){
             Toast.makeText(this, "Inserisci un'ora per l'attività", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -335,31 +345,46 @@ public class InserisciActivity extends AppCompatActivity {
         if(suoneria){
             stringaSuoneria = "Attivata";
         }
-
-        String messaggio = "Nome:\t" + nome
-                + "\nData: " + tvData.getText().toString()
-                + "\nOra: " + tvOra.getText().toString()
-                + "\nRipetizione: " + ripetizione
-                + "\nImportanza: " + stringaImportanza
-                + "\nSuoneria: " + stringaSuoneria;
-  //              + "\nAvviso: " + avviso;
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Riepilogo Inserimento");
-        builder.setMessage(messaggio);
-        builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                attivaAllarme(nome);
-                getIntent().putExtra("ATTIVITA",
-                        new Attivita(nome,tvData.getText().toString(),tvOra.getText().toString(),importanza,ripetizione,suoneria));
-                setResult(Activity.RESULT_OK,getIntent());
-                finish();
+ /*Cotrollo se atività inserita già esiste*/
+        boolean trovatoUguale = false;
+        for(int k = 0; k<listaAttivita.size();k++){
+            Log.e("ERROR"," Size  = " + listaAttivita.size());
+            Log.e("ERROR"," JKKKKKK  = " + k);
+            Attivita a = listaAttivita.get(k);
+            Attivita b = new Attivita(nome,tvData.getText().toString(),tvOra.getText().toString(),importanza,ripetizione,suoneria);
+            Log.e("ERROR"," Attivita B  = " + b.toString());
+            if(a.equals(b)){
+                Toast.makeText(this, "Nome evento "+ listaAttivita.get(k).getNome()+ "già presente", Toast.LENGTH_SHORT).show();
+                trovatoUguale=true;
             }
-        }) ;
+        }
+        if(trovatoUguale==false){
+            String messaggio = "Nome:\t" + nome
+                    + "\nData: " + tvData.getText().toString()
+                    + "\nOra: " + tvOra.getText().toString()
+                    + "\nRipetizione: " + ripetizione
+                    + "\nImportanza: " + stringaImportanza
+                    + "\nSuoneria: " + stringaSuoneria;
+            //              + "\nAvviso: " + avviso;
 
-        builder.setNegativeButton("No",null);
-        builder.create().show();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Riepilogo Inserimento");
+            builder.setMessage(messaggio);
+            builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    attivaAllarme(nome);
+                    getIntent().putExtra("ATTIVITA",
+                            new Attivita(nome,tvData.getText().toString(),tvOra.getText().toString(),importanza,ripetizione,suoneria));
+                    setResult(Activity.RESULT_OK,getIntent());
+                    finish();
+                }
+            }) ;
+
+            builder.setNegativeButton("No",null);
+            builder.create().show();
+        }
+
     }
 
     private void attivaAllarme(String messaggio){

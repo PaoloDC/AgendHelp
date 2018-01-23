@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private CustomAdapter customAdapter;
     private ArrayList<Attivita> daEliminare;
     public static String nomeAccount;
+    ArrayList<Attivita> listaAttivita = new ArrayList<>();
 
 
     @Override
@@ -46,10 +47,9 @@ public class MainActivity extends AppCompatActivity {
         customAdapter = new CustomAdapter(this, R.layout.elemento_lista, new ArrayList<Attivita>());
         lista.setAdapter(customAdapter);
 
-        ArrayList<Attivita> listaAttivita;
+
 
         if (null == savedInstanceState) {
-            listaAttivita = new ArrayList<>();
 
             for(int i=0 ; i < customAdapter.getCount() ; i++){
                 listaAttivita.add(customAdapter.getItem(i));
@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void clickButtonInserisci(View view) {
         Intent i = new Intent(this,InserisciActivity.class);
+        i.putExtra("LISTAATTIVITA",listaAttivita);
         startActivityForResult(i,1);
     }
 
@@ -98,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == 1 && resultCode == RESULT_OK){
             Attivita a = (Attivita) data.getSerializableExtra("ATTIVITA");
+            listaAttivita.add(a);
             customAdapter.add(a);
             customAdapter.notifyDataSetChanged();
         }
