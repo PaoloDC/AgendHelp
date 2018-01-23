@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private CustomAdapter customAdapter;
     private ArrayList<Attivita> daEliminare;
     public static String nomeAccount;
-
+    TextView nome ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,9 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
             finish();
         } else {
+            nome = findViewById(R.id.textNome);
             Toast.makeText(this, "Ciao " + nomeAccount, Toast.LENGTH_SHORT).show();
+            nome.setText(""+nomeAccount);
         }
 
 
