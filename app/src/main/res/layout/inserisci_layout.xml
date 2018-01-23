@@ -252,14 +252,14 @@
                     android:layout_height="wrap_content"
                     android:text="Avviso"
                     android:textSize="@dimen/dimensione_testo_bottoni_inserimento" />
-
+<!--
                 <TextView
                     android:id="@+id/tvAvviso"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/testo_esempio"
                     android:textSize="@dimen/dimensione_testo_bottoni_inserimento" />
-
+-->
             </LinearLayout>
 
 

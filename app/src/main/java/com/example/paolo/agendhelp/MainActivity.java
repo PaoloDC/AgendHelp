@@ -16,15 +16,18 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     public static final String DEBUG = "DEBUG";
-    ListView lista;
-    CustomAdapter customAdapter;
-    ArrayList<Attivita> daEliminare =new ArrayList<>() ;
-    ArrayList<Attivita> listaAttività = new ArrayList<>();
+    private ListView lista;
+    private CustomAdapter customAdapter;
+    private ArrayList<Attivita> daEliminare;
+    public static String nomeAccount;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        checkLogin();
 
         daEliminare = new ArrayList<>();
 
@@ -32,10 +35,24 @@ public class MainActivity extends AppCompatActivity {
         customAdapter = new CustomAdapter(this, R.layout.elemento_lista, new ArrayList<Attivita>());
         lista.setAdapter(customAdapter);
 
-        customAdapter.add(new Attivita("Pillola","20/01/17","15:00",true,"Ogni giorno",true));
-        listaAttività.add(new Attivita("Pillola","20/01/17","15:00",true,"Ogni giorno",true));
-        customAdapter.add(new Attivita("Gocce per diabete","17/01/2017","16:00",false,"Una volta",false));
-        listaAttività.add(new Attivita("Gocce per diabete","17/01/2017","16:00",false,"Una volta",false));
+        ArrayList<Attivita> listaAttivita;
+
+        if (null == savedInstanceState) {
+            listaAttivita = new ArrayList<>();
+
+            for(int i=0 ; i < customAdapter.getCount() ; i++){
+                listaAttivita.add(customAdapter.getItem(i));
+            }
+
+            listaAttivita.add(new Attivita("Pillola", "20/01/17", "15:00", true, "Ogni giorno", true));
+            listaAttivita.add(new Attivita("Gocce per diabete", "17/01/2017", "16:00", false, "Una volta", false));
+        } else {
+            listaAttivita = (ArrayList<Attivita>) savedInstanceState.getSerializable("LISTA_ATTIVITA");
+        }
+
+        for (int i=0 ; i < listaAttivita.size() ; i++ ){
+            customAdapter.add(listaAttivita.get(i));
+        }
 
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -61,51 +78,49 @@ public class MainActivity extends AppCompatActivity {
 
     public void clickButtonInserisci(View view) {
         Intent i = new Intent(this,InserisciActivity.class);
-        startActivity(i);
+        startActivityForResult(i,1);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 1 && resultCode == RESULT_OK){
+            Attivita a = (Attivita) data.getSerializableExtra("ATTIVITA");
+            customAdapter.add(a);
+            customAdapter.notifyDataSetChanged();
+        }
+    }
+
     public void onClickElimina(View view){
         if(daEliminare.size() == 0){
-            Toast.makeText(this, "Nessuna attività selezionata!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Nessuna attività selezionata per l'eliminazione!", Toast.LENGTH_SHORT).show();
         } else {
-         //   for(Attivita a: daEliminare){ // problema qui se elimino due eventi si stoppa l'app
-            //    customAdapter.remove(a);
-              //  listaAttività.remove(a);
-              //  daEliminare.remove(a);// bug risolto :)
-
-           // }
-            /*Questo funziona sempre :)*/
-            for(int k = 0;k<daEliminare.size();k++){
-                customAdapter.remove(daEliminare.get(k));
-                listaAttività.remove(daEliminare.get(k));
-                daEliminare.remove(k);
-                k=k-1; /*L'arraylist diventa minore mentre k aumenta va a finire che non controllo tutti gli elementi */
+            for(int i=0 ; i < daEliminare.size() ; i++){
+                customAdapter.remove(daEliminare.get(i));
             }
-
-            customAdapter.notifyDataSetChanged();
+            daEliminare.clear();
         }
     }
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
+        ArrayList<Attivita> lista = new ArrayList<>();
 
-        savedInstanceState.putSerializable("LISTAATTIVITA",listaAttività);
-        super.onSaveInstanceState(savedInstanceState);
-
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        if(savedInstanceState!=null){
-
-            listaAttività = (ArrayList<Attivita>) savedInstanceState.getSerializable("LISTAATTIVITA");
-
-            Log.d("DEBUG" , "CI vado");
-            for(int x = 0; x<listaAttività.size();x++){
-                customAdapter.add(listaAttività.get(x));
-            }
-            /*alla lista aggiungo il set adapter*/
-            lista.setAdapter(customAdapter);
-
+        for(int i=0 ; i < customAdapter.getCount() ; i++){
+            lista.add(customAdapter.getItem(i));
         }
-        super.onRestoreInstanceState(savedInstanceState);
+
+        savedInstanceState.putSerializable("LISTA_ATTIVITA",lista);
+        super.onSaveInstanceState(savedInstanceState);
     }
+
+    private void checkLogin(){
+
+
+
+        if (nomeAccount == null || nomeAccount.equals("")) {
+            Intent i = new Intent(this,LoginActivity.class);
+            startActivity(i);
+            finish();
+        }
+    }
+
 }

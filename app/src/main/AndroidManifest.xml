@@ -18,6 +18,8 @@
         </activity>
         <activity android:name=".InserisciActivity"/>
         <activity android:name=".Allarme" android:noHistory="true"/>
+        <activity android:name=".LoginActivity"/>
+        <activity android:name=".RegistrazioneActivity"/>
     </application>
 
 </manifest>

@@ -22,6 +22,9 @@ public class Allarme extends Activity {
         String msg = getIntent().getStringExtra(MESSAGGIO);
         TextView tvMessaggioAllarme = findViewById(R.id.tvMessaggioAllarme);
         tvMessaggioAllarme.setText(msg);
+
+        TextView tvOraEsatta = findViewById(R.id.tvOraEsatta);
+        tvOraEsatta.setText(""+System.currentTimeMillis());
     }
 
     public void clickEsci(View view) {

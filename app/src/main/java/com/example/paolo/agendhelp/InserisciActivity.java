@@ -50,7 +50,7 @@ public class InserisciActivity extends AppCompatActivity {
 
 
     //riferimenti al layout
-    private TextView tvAvviso;
+   // private TextView tvAvviso;
     private TextView tvData;
     private TextView tvImportanza;
     private TextView tvOra;
@@ -61,7 +61,7 @@ public class InserisciActivity extends AppCompatActivity {
     private String ripetizione;
     private boolean importanza;
     private boolean suoneria;
-    private String avviso;
+    //private String avviso;
     private boolean selezionataDataOdierna;
 
 
@@ -73,7 +73,7 @@ public class InserisciActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inserisci_layout);
 
-        tvAvviso = findViewById(R.id.tvAvviso);
+       // tvAvviso = findViewById(R.id.tvAvviso);
         tvData = findViewById(R.id.tvData);
         tvImportanza = findViewById(R.id.tvImportanza);
         tvOra = findViewById(R.id.tvOra);
@@ -84,12 +84,12 @@ public class InserisciActivity extends AppCompatActivity {
         suoneria = false;
         importanza = false;
         ripetizione = scelteRipetizione[0];
-        avviso = scelteAvviso[0];
+      //  avviso = scelteAvviso[0];
 
         tvRipetizione.setText(scelteRipetizione[0]);
         tvImportanza.setText("Bassa importanza");
         tvSuoneria.setText("Suoneria disattivata");
-        tvAvviso.setText(scelteAvviso[0]);
+       // tvAvviso.setText(scelteAvviso[0]);
     }
 
     public void clickBack(View view) {
@@ -289,7 +289,7 @@ public class InserisciActivity extends AppCompatActivity {
 
         builder.create().show();
     }
-
+/*
     public void clickAvviso(View view) {
 
 
@@ -312,7 +312,7 @@ public class InserisciActivity extends AppCompatActivity {
 
         builder.create().show();
     }
-
+*/
     public void clickInserisciAttivita(View view) {
         final String nome = etNomeAttivita.getText().toString();
         if(nome.equals("")){
@@ -340,8 +340,8 @@ public class InserisciActivity extends AppCompatActivity {
                 + "\nOra: " + tvOra.getText().toString()
                 + "\nRipetizione: " + ripetizione
                 + "\nImportanza: " + stringaImportanza
-                + "\nSuoneria: " + stringaSuoneria
-                + "\nAvviso: " + avviso;
+                + "\nSuoneria: " + stringaSuoneria;
+  //              + "\nAvviso: " + avviso;
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Riepilogo Inserimento");
@@ -350,6 +350,8 @@ public class InserisciActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 attivaAllarme(nome);
+                getIntent().putExtra("ATTIVITA",
+                        new Attivita(nome,tvData.getText().toString(),tvOra.getText().toString(),importanza,ripetizione,suoneria));
                 finish();
             }
         }) ;
@@ -359,21 +361,16 @@ public class InserisciActivity extends AppCompatActivity {
     }
 
     private void attivaAllarme(String messaggio){
-
-
         /*Funziona*/
-       Intent i = new Intent(getApplicationContext(),Allarme.class);
+        Intent i = new Intent(getApplicationContext(),Allarme.class);
         i.putExtra(Allarme.MESSAGGIO,messaggio);
         i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         /*intent in attesa*/
         PendingIntent pi = PendingIntent.getActivity(getApplicationContext(),0,i,0);
-        AlarmManager am = (AlarmManager) this.getSystemService(this.ALARM_SERVICE);/*manaager alrm*/
+        AlarmManager am = (AlarmManager) this.getSystemService(ALARM_SERVICE);
         am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
                 SystemClock.elapsedRealtime()+getMilliSecondi(),pi);
         Log.d(DEBUG,"msg: millisecondiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii "+ getMilliSecondi());
-
-
-
 
     }
     public long getMilliSecondi(){
