@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -348,13 +349,10 @@ public class InserisciActivity extends AppCompatActivity {
  /*Cotrollo se atività inserita già esiste*/
         boolean trovatoUguale = false;
         for(int k = 0; k<listaAttivita.size();k++){
-            Log.e("ERROR"," Size  = " + listaAttivita.size());
-            Log.e("ERROR"," JKKKKKK  = " + k);
             Attivita a = listaAttivita.get(k);
             Attivita b = new Attivita(nome,tvData.getText().toString(),tvOra.getText().toString(),importanza,ripetizione,suoneria);
-            Log.e("ERROR"," Attivita B  = " + b.toString());
             if(a.equals(b)){
-                Toast.makeText(this, "Nome evento "+ listaAttivita.get(k).getNome()+ "già presente", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Evento "+ listaAttivita.get(k).getNome()+ " già presente", Toast.LENGTH_SHORT).show();
                 trovatoUguale=true;
             }
         }
@@ -474,6 +472,5 @@ public class InserisciActivity extends AppCompatActivity {
 
                 }
             return millisDiff;
-            }
-
+    }
 }
