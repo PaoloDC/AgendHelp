@@ -19,7 +19,7 @@ public class Allarme extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.allarme_layout);
 
-        String msg = getIntent().getStringExtra(MESSAGGIO);
+        String msg = getIntent().getStringExtra("MESSAGGIO");
         TextView tvMessaggioAllarme = findViewById(R.id.tvMessaggioAllarme);
         tvMessaggioAllarme.setText(msg);
 
