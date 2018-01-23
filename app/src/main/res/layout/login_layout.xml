@@ -16,12 +16,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Benvenuto in AgedHelp"
+            android:textColor="#e28a0e"
             android:textSize="30sp" />
 
         <TextView
             android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="#1576d6"
             android:text="Accedi con le tue credenziali altrimenti registrati"
             android:textSize="25sp" />
     </LinearLayout>
@@ -83,35 +85,43 @@
         android:layout_centerHorizontal="true"
         android:onClick="clickAccedi"
         android:text="Accedi"
+        android:background="#ef7a04"
         android:textSize="25sp" />
+
+
+
 
     <LinearLayout
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:layout_below="@id/buttonAccedi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Per registrarti clicca"
-            android:textSize="20sp" />
-
-        <Button
-            android:onClick="clickRegistrati"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="QUI"
-            android:textSize="20sp" />
-        <Button
-            android:onClick="clickEliminaFileImpostazioni"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="elimina"
-            android:textSize="20sp" />
-
+        android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Per registrarti clicca"
+                android:textSize="20sp" />
+            <Button
+                android:onClick="clickRegistrati"
+                android:layout_width="150dp"
+                android:layout_height="45dp"
+                android:text="QUI"
+                android:textSize="20sp"
+                android:background="#0973de"/>
+            <Button
+                android:layout_marginTop="5dp"
+                android:onClick="clickEliminaFileImpostazioni"
+                android:layout_width="150dp"
+                android:layout_height="45dp"
+                android:text="elimina"
+                android:textSize="20sp"
+                android:background="#f21c00"/>
 
     </LinearLayout>
+
+
+
+
 </RelativeLayout>
