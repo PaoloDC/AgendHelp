@@ -88,16 +88,13 @@
         android:background="#ef7a04"
         android:textSize="25sp" />
 
-
-
-
     <LinearLayout
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:layout_below="@id/buttonAccedi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -110,7 +107,9 @@
                 android:text="QUI"
                 android:textSize="20sp"
                 android:background="#0973de"/>
+
             <Button
+                android:visibility="invisible"
                 android:layout_marginTop="5dp"
                 android:onClick="clickEliminaFileImpostazioni"
                 android:layout_width="150dp"
@@ -118,10 +117,5 @@
                 android:text="elimina"
                 android:textSize="20sp"
                 android:background="#f21c00"/>
-
     </LinearLayout>
-
-
-
-
 </RelativeLayout>

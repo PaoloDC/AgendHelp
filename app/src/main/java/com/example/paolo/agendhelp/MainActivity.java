@@ -9,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -127,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clickButtonEsci(View view) {
+        GestoreFile.logout(this);
         Intent i = new Intent(this,LoginActivity.class);
         startActivity(i);
         finish();
