@@ -12,13 +12,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:onClick="clickBack"
-            android:text="back"
-            android:textSize="@dimen/dimensione_testo_inserisci" />
 
         <TextView
             android:textColor="#FFFFFF"
@@ -266,13 +259,33 @@
         </LinearLayout>
         -->
     </LinearLayout>
-
+<LinearLayout
+    android:layout_below="@id/gridLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:orientation="horizontal"
+    android:layout_marginTop="15dp">
     <Button
         android:onClick="clickInserisciAttivita"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="135dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:text="Inserisci"
-        android:textSize="@dimen/dimensione_testo_inserisci" />
+        android:textSize="@dimen/dimensione_testo_inserisci"
+        android:background="#0e52e3"/>
+    <Button
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_width="135dp"
+        android:layout_height="50dp"
+        android:layout_gravity="left"
+        android:onClick="clickBack"
+        android:text="back"
+        android:textSize="@dimen/dimensione_testo_inserisci"
+        android:background="#fcc200"/>
+
+</LinearLayout>
+
 </RelativeLayout>
