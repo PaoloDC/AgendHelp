@@ -55,15 +55,15 @@ public class Attivita implements Serializable {
     public boolean equals(Object obj) {
         if (obj instanceof  Attivita){
             Attivita a = (Attivita) obj;
-            return a.getImportante()==(importante) &&
-                    a.getSuoneria()==(suoneria) &&
+            return a.getImportante().equals(importante) &&
+                    a.getSuoneria().equals(suoneria) &&
                     a.getData().equals(data) &&
                     a.getNome().equals(nome) &&
                     a.getOra().equals(ora) &&
                     a.getRipetizione().equals(ripetizione);
-        }else{
-            return false;
         }
+            return false;
+
 
     }
 
