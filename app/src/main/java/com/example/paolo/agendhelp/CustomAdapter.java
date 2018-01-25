@@ -35,15 +35,18 @@ public class CustomAdapter extends ArrayAdapter<Attivita> {
         Log.d("DEBUG", "Contatto in posizione " + position + a.toString());
 
         TextView nome;
-        TextView data;
+        TextView ora;
         CheckBox checkBox;
 
         nome = v.findViewById(R.id.elemento_nome);
-        data = v.findViewById(R.id.elemento_ora);
+        ora = v.findViewById(R.id.elemento_ora);
         checkBox = v.findViewById(R.id.checkElimina);
 
+        TextView data = v.findViewById(R.id.elemento_data);
+
         nome.setText(a.getNome());
-        data.setText(a.getOra());
+        data.setText(a.getData());
+        ora.setText(a.getOra());
         checkBox.setChecked(false);
 
         return v;

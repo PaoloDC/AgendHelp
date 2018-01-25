@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -192,7 +191,7 @@ public class InserisciActivity extends AppCompatActivity {
 
         if(selezionataDataOdierna) {
             int oraAttuale = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-            oraAttuale++;
+           // oraAttuale++;
             int minutoAttuale = Calendar.getInstance().get(Calendar.MINUTE);
 
             Log.d(DEBUG,"Ora Attuale: " + oraAttuale + " : " + minutoAttuale
@@ -239,8 +238,8 @@ public class InserisciActivity extends AppCompatActivity {
     public void clickImportanza(View view) {
 
         final String[] scelte = {
-                "Alta importanza",
-                "Bassa importanza"
+                "Bassa importanza",
+                "Alta importanza"
         };
 
         // Creating and Building the Dialog
@@ -260,9 +259,9 @@ public class InserisciActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (importanza)
-                    tvImportanza.setText(scelte[0]);
-                else
                     tvImportanza.setText(scelte[1]);
+                else
+                    tvImportanza.setText(scelte[0]);
             }
         });
 
@@ -271,8 +270,8 @@ public class InserisciActivity extends AppCompatActivity {
 
     public void clickSuoneria(View view) {
         final String[] scelte = {
-                "Suoneria attivata",
-                "Suoneria disattivata"
+                "Suoneria disattivata",
+                "Suoneria attivata"
         };
 
         // Creating and Building the Dialog
@@ -291,9 +290,9 @@ public class InserisciActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (suoneria)
-                    tvSuoneria.setText(scelte[0]);
-                else
                     tvSuoneria.setText(scelte[1]);
+                else
+                    tvSuoneria.setText(scelte[0]);
             }
         });
 

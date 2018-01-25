@@ -3,7 +3,7 @@
     android:layout_width="400dp"
     android:layout_height="match_parent"
     android:background="#2683df"
-    android:orientation="horizontal" >
+    android:orientation="horizontal">
 
     <CheckBox
         android:id="@+id/checkElimina"
@@ -26,16 +26,34 @@
             android:textColor="#ffe602"
             android:textSize="25dp" />
 
-        <TextView
-            android:id="@+id/elemento_ora"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:orientation="horizontal"
             android:paddingBottom="5dp"
-            android:paddingLeft="15dp"
-            android:text="Ora"
-            android:textColor="#fc8b01"
-            android:textSize="25dp" />
+            android:paddingLeft="15dp">
+
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/elemento_ora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ora"
+                android:textColor="#fc8b01"
+                android:textSize="25dp" />
+
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/elemento_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Data"
+                android:textColor="#fc8b01"
+                android:textSize="25dp" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 </LinearLayout>

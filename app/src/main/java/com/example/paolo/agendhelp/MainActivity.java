@@ -57,9 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
             listaAttivita.add(new Attivita("Pillola", "20/01/17", "15:00", true, "Ogni giorno", true));
             listaAttivita.add(new Attivita("Gocce per diabete", "17/01/2017", "16:00", false, "Una volta", false));
-            listaAttivita.add(new Attivita("Pillola", "20/01/17", "15:00", true, "Ogni giorno", true));
-            listaAttivita.add(new Attivita("Gocce per diabete", "17/01/2017", "16:00", false, "Una volta", false));
-        } else {
+         } else {
             listaAttivita = (ArrayList<Attivita>) savedInstanceState.getSerializable("LISTA_ATTIVITA");
         }
 
