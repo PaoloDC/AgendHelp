@@ -6,6 +6,9 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 /**
  * Created by Paolo2 on 18/01/2018.
  */
@@ -24,7 +27,10 @@ public class Allarme extends Activity {
         tvMessaggioAllarme.setText(msg);
 
         TextView tvOraEsatta = findViewById(R.id.tvOraEsatta);
-        tvOraEsatta.setText(""+System.currentTimeMillis());
+
+        GregorianCalendar ora = new GregorianCalendar();
+
+        tvOraEsatta.setText(""+ ora.get(Calendar.HOUR_OF_DAY) + " : " + ora.get(Calendar.MINUTE));
     }
 
     public void clickEsci(View view) {

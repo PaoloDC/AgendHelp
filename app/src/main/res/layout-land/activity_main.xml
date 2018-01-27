@@ -40,6 +40,27 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         >
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/llNoAlarm"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@drawable/alarm"
+                android:layout_width="300px"
+                android:layout_height="300px" />
+
+            <TextView
+                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:text="Nessuna attività presente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
         <ListView
             android:id="@+id/mialista"
             android:layout_marginTop="2dp"

@@ -37,18 +37,18 @@ public class InserisciActivity extends AppCompatActivity {
     public static final String DEBUG = "DEBUG";
     final String[] scelteRipetizione = {
             "Nessuna ripetizione",
-            "Una volta al giorno",
+     /*       "Una volta al giorno",
             "Due volte al giorno",
             "Una volta la settimana",
             "Una volta al mese"
-    };
+ */   };
     final String[] scelteAvviso = {
             "All'ora esatta",
-            "10 minuti prima",
+  /*          "10 minuti prima",
             "5 minuti prima",
             "5 minuti dopo",
             "10 minuti dopo"
-    };
+   */ };
 
     final String testo_esempio = "---";
 
@@ -245,12 +245,12 @@ public class InserisciActivity extends AppCompatActivity {
         // Creating and Building the Dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Importanza");
-        builder.setSingleChoiceItems(scelte, 3, new DialogInterface.OnClickListener() {
+        builder.setSingleChoiceItems(scelte, 1, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                 if (item == 0)
-                    importanza = true;
-                else
                     importanza = false;
+                else
+                    importanza = true;
 
             }
         });
@@ -271,13 +271,13 @@ public class InserisciActivity extends AppCompatActivity {
     public void clickSuoneria(View view) {
         final String[] scelte = {
                 "Suoneria disattivata",
-                "Suoneria attivata"
+            //    "Suoneria attivata"
         };
 
         // Creating and Building the Dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Suoneria");
-        builder.setSingleChoiceItems(scelte, 0, new DialogInterface.OnClickListener() {
+        builder.setSingleChoiceItems(scelte, 1, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                 if (item == 0)
                     suoneria = false;
