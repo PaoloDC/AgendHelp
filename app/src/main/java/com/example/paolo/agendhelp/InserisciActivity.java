@@ -246,12 +246,12 @@ public class InserisciActivity extends AppCompatActivity {
         // Creating and Building the Dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Importanza");
-        builder.setSingleChoiceItems(scelte, 0, new DialogInterface.OnClickListener() {
+        builder.setSingleChoiceItems(scelte, 3, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                 if (item == 0)
-                    importanza = false;
-                else
                     importanza = true;
+                else
+                    importanza = false;
 
             }
         });
