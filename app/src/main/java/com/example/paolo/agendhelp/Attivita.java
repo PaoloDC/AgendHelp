@@ -3,9 +3,7 @@ package com.example.paolo.agendhelp;
 import java.io.Serializable;
 
 
-
 /**
- *
  * Created by Paolo on 17/01/2018.
  */
 
@@ -18,13 +16,13 @@ public class Attivita implements Serializable {
     private String ripetizione;
     private Boolean suoneria;
 
-    public Attivita (String nome, String data, String ora, Boolean importante,String ripetizione,Boolean suoneria){
-    this.nome=nome;
-    this.data=data;
-    this.ora=ora;
-    this.importante=importante;
-    this.ripetizione=ripetizione;
-    this.suoneria=suoneria;
+    public Attivita(String nome, String data, String ora, Boolean importante, String ripetizione, Boolean suoneria) {
+        this.nome = nome;
+        this.data = data;
+        this.ora = ora;
+        this.importante = importante;
+        this.ripetizione = ripetizione;
+        this.suoneria = suoneria;
     }
 
     public String getNome() {
@@ -53,7 +51,7 @@ public class Attivita implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof  Attivita){
+        if (obj instanceof Attivita) {
             Attivita a = (Attivita) obj;
             return a.getImportante().equals(importante) &&
                     a.getSuoneria().equals(suoneria) &&
@@ -62,14 +60,14 @@ public class Attivita implements Serializable {
                     a.getOra().equals(ora) &&
                     a.getRipetizione().equals(ripetizione);
         }
-            return false;
+        return false;
 
 
     }
 
     @Override
     public String toString() {
-        return "Attività = "+ " NOME = " + nome + " DATA = " + data +
+        return "Attività = " + " NOME = " + nome + " DATA = " + data +
                 " ORA = " + ora + " IMPORTANZA =" + importante + " RIPETIZIONE = " +
                 ripetizione + " SUONERIA = " + suoneria;
     }

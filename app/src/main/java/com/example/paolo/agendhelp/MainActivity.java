@@ -12,7 +12,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,10 +21,10 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Attivita> daEliminare;
     public static String nomeAccount;
     public LinearLayout llNoAlarm;
-    ArrayList<Attivita> listaAttivita = new ArrayList<>();
+   // ArrayList<Attivita> listaAttivita = new ArrayList<>();
 
     public void checkAlarm() {
-
+/*
         GregorianCalendar oggi = new GregorianCalendar();
 
         for (int i = 0; i < customAdapter.getCount(); i++) {
@@ -41,13 +40,16 @@ public class MainActivity extends AppCompatActivity {
 
             GregorianCalendar gc = new GregorianCalendar(anno,mese,giorno,ora,min);
 
-            System.out.println(gc);
-            System.out.println(oggi);
+            SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy : hh/mm");
+            String miadata = s.format(gc.getTime());
+            String moggi = s.format(gc.getTime());
+
+            System.out.println("miadata: " + miadata + ", " + moggi);
 
             if (gc.before(oggi)){
                 customAdapter.remove(a);
             }
-        }
+        }*/
 
         if (customAdapter.getCount() == 0) {
             llNoAlarm.setVisibility(View.VISIBLE);
@@ -70,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
             finish();
         } else {
-            Toast.makeText(this, "Ciao " + nomeAccount, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Ciao " + nomeAccount, Toast.LENGTH_SHORT).show();
 
         }
 
@@ -79,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
         lista = findViewById(R.id.mialista);
         customAdapter = new CustomAdapter(this, R.layout.elemento_lista, new ArrayList<Attivita>());
         lista.setAdapter(customAdapter);
+
+        ArrayList<Attivita> listaAttivita = new ArrayList<>();
 
         if (null == savedInstanceState) {
             listaAttivita.add(new Attivita("Pillola", "20/01/17", "15:00", true, "Ogni giorno", true));
@@ -117,6 +121,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void clickButtonInserisci(View view) {
         Intent i = new Intent(this, InserisciActivity.class);
+
+        ArrayList<Attivita> listaAttivita = new ArrayList<>();
+
+        for(int j=0 ; j < customAdapter.getCount() ; j++){
+            listaAttivita.add(customAdapter.getItem(j));
+        }
+
         i.putExtra("LISTAATTIVITA", listaAttivita);
         startActivityForResult(i, 1);
     }
@@ -126,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         /*Nuovo evento nella lista */
         if (requestCode == 1 && resultCode == RESULT_OK) {
             Attivita a = (Attivita) data.getSerializableExtra("ATTIVITA");
-            listaAttivita.add(a);
+
             customAdapter.add(a);
             customAdapter.notifyDataSetChanged();
         }
@@ -148,6 +159,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
+        ArrayList<Attivita> listaAttivita = new ArrayList<>();
+
+        for(int j=0 ; j < customAdapter.getCount() ; j++){
+            listaAttivita.add(customAdapter.getItem(j));
+        }
+
         /*Salvataggio lista*/
         savedInstanceState.putSerializable("LISTA_ATTIVITA", listaAttivita);
         super.onSaveInstanceState(savedInstanceState);

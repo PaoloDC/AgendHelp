@@ -2,12 +2,11 @@ package com.example.paolo.agendhelp;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Paolo2 on 18/01/2018.
@@ -16,21 +15,26 @@ import java.util.GregorianCalendar;
 public class Allarme extends Activity {
 
     public static final String MESSAGGIO = "MESSAGGIO";
+    public static final String TEMPO = "TEMPO";
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.allarme_layout);
 
-        String msg = getIntent().getStringExtra("MESSAGGIO");
+        String msg = getIntent().getStringExtra(MESSAGGIO);
+        long tempoAllarme = getIntent().getLongExtra(TEMPO,-1);
+
+        TextView tvOraEsatta = findViewById(R.id.tvOraEsatta);
         TextView tvMessaggioAllarme = findViewById(R.id.tvMessaggioAllarme);
         tvMessaggioAllarme.setText(msg);
 
-        TextView tvOraEsatta = findViewById(R.id.tvOraEsatta);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        Date oggi = new Date(tempoAllarme);
+        System.out.println("attuale: " + sdf.format(oggi));
+        String attuale = sdf.format(oggi);
 
-        GregorianCalendar ora = new GregorianCalendar();
-
-        tvOraEsatta.setText(""+ ora.get(Calendar.HOUR_OF_DAY) + " : " + ora.get(Calendar.MINUTE));
+        tvOraEsatta.setText(attuale);
     }
 
     public void clickEsci(View view) {
