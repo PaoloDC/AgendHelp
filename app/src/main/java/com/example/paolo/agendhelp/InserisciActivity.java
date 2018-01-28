@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * Created by Paolo2 on 17/01/2018.
@@ -115,9 +116,9 @@ public class InserisciActivity extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker datePicker, int anno, int mese, int giorno) {
                         mese++;
-                        stringaData = giorno + "/" + mese + "/" + anno;
+                        stringaData = anno + "/" + mese + "/" + giorno;
 
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY);
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd", Locale.ITALY);
                         Date dataScelta = null;
                         try {
                             dataScelta = sdf.parse(stringaData);
@@ -163,7 +164,7 @@ public class InserisciActivity extends AppCompatActivity {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int oraSelezionata, int minutoSelezionato) {
 
-                        stringaOra = oraSelezionata + ":" + minutoSelezionato;
+                        stringaOra = oraSelezionata + ":" + minutoSelezionato ;
                         if (checkSelezioneOrario(stringaOra)) {
                             tvOra.setText(stringaOra);
                         } else {
@@ -185,12 +186,28 @@ public class InserisciActivity extends AppCompatActivity {
         String s2 = stringaOra.substring(x + 1);
 
         int oraSelezionata = Integer.parseInt(s1);
+        /*Toast*/
+      /*  Toast.makeText(InserisciActivity.this,
+                "Ora selezionata= " + oraSelezionata,
+                Toast.LENGTH_SHORT).show();*/
         int minutoSelezionato = Integer.parseInt(s2);
+        /*Toast*/
+       /* Toast.makeText(InserisciActivity.this,
+                "Minuto selezionata = " + minutoSelezionato,
+                Toast.LENGTH_SHORT).show();*/
 
         if (selezionataDataOdierna) {
             int oraAttuale = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+
+           /* Toast.makeText(InserisciActivity.this,
+                    "Ora attuale = " + oraAttuale,
+                    Toast.LENGTH_SHORT).show();*/
             // oraAttuale++;
             int minutoAttuale = Calendar.getInstance().get(Calendar.MINUTE);
+
+            /*Toast.makeText(InserisciActivity.this,
+                    "Minuto attuale = " + minutoAttuale,
+                    Toast.LENGTH_SHORT).show();*/
 
             Log.d(DEBUG, "Ora Attuale: " + oraAttuale + " : " + minutoAttuale
                     + "\nOra Scelta: " + oraSelezionata + " : " + minutoSelezionato);
@@ -200,11 +217,16 @@ public class InserisciActivity extends AppCompatActivity {
                         "L'ora selezionata è antecedente all'ora attuale",
                         Toast.LENGTH_SHORT).show();
                 return false;
-            } else if (oraAttuale > oraSelezionata && minutoAttuale > minutoSelezionato) {
+            } else if (oraAttuale >= oraSelezionata && minutoAttuale >= minutoSelezionato) {
                 Toast.makeText(InserisciActivity.this,
                         "L'ora selezionata è antecedente all'ora attuale",
                         Toast.LENGTH_SHORT).show();
                 return false;
+            } else if(oraAttuale == oraSelezionata && minutoAttuale == minutoSelezionato) {
+                Toast.makeText(InserisciActivity.this,
+                        "L'ora selezionata è uguale a quella inserita",
+                        Toast.LENGTH_SHORT).show();
+
             }
         }
         return true;
@@ -388,12 +410,12 @@ public class InserisciActivity extends AppCompatActivity {
         stringaData = tvData.getText().toString();
         stringaOra = tvOra.getText().toString();
 
-        long tempoAllarme = calcolaTempo(stringaData,stringaOra);
+        //long tempoAllarme = calcolaTempo(stringaData,stringaOra);
 
         /*Funziona*/
         Intent i = new Intent(getApplicationContext(), Allarme.class);
         i.putExtra(Allarme.MESSAGGIO, messaggio);
-        i.putExtra(Allarme.TEMPO, tempoAllarme);
+        i.putExtra(Allarme.TEMPO, getMilliSecondi());
         i.setAction(Intent.ACTION_MAIN);
         i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 
@@ -408,18 +430,18 @@ public class InserisciActivity extends AppCompatActivity {
         } else if (messaggio.contains("spesa")) {
             am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 120000, pi);
         } else {
-            am.set(AlarmManager.RTC, SystemClock.elapsedRealtime() + getMilliSecondi(), pi);
-        }
+            am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + getMilliSecondi(), pi);
+       }
     }
 
     /**
      * Metodo che calcola il tempo dell'allarme in millisecondi
      *
-     * @param stringaData la data attuale
-     * @param stringaOra  l'ora attuale
+     * @param //stringaData la data attuale
+     * @param //stringaOra  l'ora attuale
      * @return un long corrispondente ai millisec del tempo dell'allarme
      */
-    public long calcolaTempo(String stringaData, String stringaOra) {
+  /*  public long calcolaTempo(String stringaData, String stringaOra) {
 
         System.out.println("ELAPESED: " + SystemClock.elapsedRealtime());
 
@@ -434,52 +456,48 @@ public class InserisciActivity extends AppCompatActivity {
 
         }
         return millis;
-    }
+    }*/
 
 
     public long getMilliSecondi() {
         long millisDiff = 0;
 
         try {
+
             Calendar c = Calendar.getInstance();
-            //  System.out.println(c.getTime());	/* Rappresentazione come stringa in base al tuo Locale */
-            //   System.out.println(c.get(Calendar.YEAR)); /* Ottieni l'anno */
-            //  System.out.println("mese"+c.get((Calendar.MONTH))); /* Ottieni il mese */
-            //   System.out.println(c.get(Calendar.DAY_OF_MONTH)); /* Ottieni il giorno */
-            //   System.out.println(c.get(Calendar.HOUR_OF_DAY));
-            //   System.out.println(c.get(Calendar.MINUTE));
-
             SimpleDateFormat fmt = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            fmt.setTimeZone(TimeZone.getTimeZone("GMT + 1"));
 
+            /**Settaggio anno mese giorno ora minuti e secondi**/
             int anno = c.get(Calendar.YEAR);
             int mese = c.get(Calendar.MONTH) + 1;
             int giorno = c.get(Calendar.DAY_OF_MONTH);
-            int ora = c.get(Calendar.HOUR_OF_DAY) + 1;
+            int ora = c.get(Calendar.HOUR_OF_DAY)  ;
             int minuti = c.get(Calendar.MINUTE);
             int secondi = c.get(Calendar.SECOND);
 
 
-            String strDate1 = "" + anno + "/" + mese + "/" + giorno + " " + ora + ":" + minuti + ":" + secondi;
-            //             Log.d(DEBUG,"msg: Stringaaaa dataaaaaaa111111 "+ strDate1);
+            String strDateOdierna = "" + anno + "/" + mese + "/" + giorno + " " + ora + ":" + minuti + ":" + secondi;
+                        Log.d(DEBUG,"msg: Stringaaaa dataaaaaaa ODIERNA=  "+ strDateOdierna);
 
-            String strDate2 = stringaData + " " + stringaOra + ":" + 0 + 0;
-            //          Log.d(DEBUG,"msg: Stringaaaa dataaaaaaa2222 "+ strDate2);
+            String strDateSelezionata = stringaData+" "+stringaOra+":"+secondi;
+                      Log.d(DEBUG,"msg: Stringaaaa dataaaaaaa SELEZIONATA "+ strDateSelezionata);
 
 
             fmt.setLenient(false);
 
-// Parses the two strings.
+            // Parses the two strings.
 
-            Date d1 = fmt.parse(strDate1);
+            Date d1 = fmt.parse(strDateOdierna);
 
-            Date d2 = fmt.parse(strDate2);
+            Date d2 = fmt.parse(strDateSelezionata);
 
-// Calculates the difference in milliseconds.
+            // Calculates the difference in milliseconds.
 
             millisDiff = d2.getTime() - d1.getTime();
-            //        Log.d(DEBUG,"msg: Stringaaaa dataaaaaaa "+ strDate2);
+                    Log.d(DEBUG,"msg: MILLISECONDI "+ millisDiff);
 
-// Calculates days/hours/minutes/seconds.
+            // Calculates days/hours/minutes/seconds.
 
             int seconds = (int) (millisDiff / 1000 % 60);
 
@@ -499,7 +517,8 @@ public class InserisciActivity extends AppCompatActivity {
 
                     System.out.print(minutes + " minutes, ");
 
-                    System.out.println(seconds + " seconds");*/
+                    System.out.println(seconds + " seconds");
+                    */
 
         } catch (Exception e) {
 

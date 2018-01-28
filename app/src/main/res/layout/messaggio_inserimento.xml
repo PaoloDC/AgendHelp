@@ -5,6 +5,7 @@
 
 
     <TextView
+        android:inputType="date"
         android:textSize="15sp"
         android:background="#FFFFFF"
         android:id="@+id/tvOraEsatta"

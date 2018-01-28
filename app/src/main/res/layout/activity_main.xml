@@ -45,7 +45,7 @@
 
         <ImageView
             android:layout_gravity="center"
-            android:src="@drawable/alarm"
+            android:src="@drawable/calendariodisegno"
             android:layout_width="300px"
             android:layout_height="300px" />
 
