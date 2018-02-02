@@ -1,68 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:padding="10dp"
-        android:background="#0050b1"
         android:id="@+id/llTop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
+        android:background="#0050b1"
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <TextView
-            android:textColor="#FFFFFF"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Inserisci il nome dell'attività"
+            android:textColor="#FFFFFF"
             android:textSize="@dimen/dimensione_testo_inserisci" />
 
         <EditText
             android:id="@+id/etNomeAttivita"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#7c7c7c"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ricordami di...."
+            android:textColor="#FFFFFF"
+            android:textColorHint="#7c7c7c"
             android:textSize="@dimen/dimensione_testo_inserisci" />
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/gridLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/llTop"
-        android:orientation="vertical"
-        android:id="@+id/gridLayout">
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:onClick="clickData"
+            android:clickable="true"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-
 
             <ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/attivita2"
-                android:onClick="clickData"
-                />
+                android:src="@drawable/attivita2" />
 
             <LinearLayout
-                android:layout_marginLeft="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:orientation="vertical">
 
                 <TextView
-                    android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Data"
-                    android:textSize="@dimen/dimensione_testo_bottoni_inserimento" />
+                    android:textSize="@dimen/dimensione_testo_bottoni_inserimento"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvData"
@@ -77,30 +74,29 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:clickable="true"
+            android:onClick="clickOra"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-
 
             <ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/orologio"
-                android:onClick="clickOra"
-                />
+                android:src="@drawable/orologio" />
 
             <LinearLayout
-                android:layout_marginLeft="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:orientation="vertical">
 
                 <TextView
-                    android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Ora"
-                    android:textSize="@dimen/dimensione_testo_bottoni_inserimento" />
+                    android:textSize="@dimen/dimensione_testo_bottoni_inserimento"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvOra"
@@ -113,30 +109,31 @@
 
 
         </LinearLayout>
+
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:clickable="true"
+            android:onClick="clickRipetizione"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/ripetizione"
-                android:onClick="clickRipetizione"
-                />
+                android:src="@drawable/ripetizione" />
 
             <LinearLayout
-                android:layout_marginLeft="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:orientation="vertical">
 
                 <TextView
-                    android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Ripetizione"
-                    android:textSize="@dimen/dimensione_testo_bottoni_inserimento" />
+                    android:textSize="@dimen/dimensione_testo_bottoni_inserimento"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvRipetizione"
@@ -149,30 +146,31 @@
 
 
         </LinearLayout>
+
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:clickable="true"
+            android:onClick="clickImportanza"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/importante"
-                android:onClick="clickImportanza"
-                />
+                android:src="@drawable/importante" />
 
             <LinearLayout
-                android:layout_marginLeft="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:orientation="vertical">
 
                 <TextView
-                    android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Importanza"
-                    android:textSize="@dimen/dimensione_testo_bottoni_inserimento" />
+                    android:textSize="@dimen/dimensione_testo_bottoni_inserimento"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvImportanza"
@@ -184,32 +182,32 @@
             </LinearLayout>
 
 
-
         </LinearLayout>
+
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:clickable="true"
+            android:onClick="clickSuoneria"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/androidsuoneria"
-                android:onClick="clickSuoneria"
-                />
+                android:src="@drawable/androidsuoneria" />
 
             <LinearLayout
-                android:layout_marginLeft="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:orientation="vertical">
 
                 <TextView
-                    android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Suoneria"
-                    android:textSize="@dimen/dimensione_testo_bottoni_inserimento" />
+                    android:textSize="@dimen/dimensione_testo_bottoni_inserimento"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvSuoneria"
@@ -219,7 +217,6 @@
                     android:textSize="@dimen/dimensione_testo_bottoni_inserimento" />
 
             </LinearLayout>
-
 
 
         </LinearLayout>
@@ -259,33 +256,36 @@
         </LinearLayout>
         -->
     </LinearLayout>
-<LinearLayout
-    android:layout_below="@id/gridLayout"
-    android:layout_width="265dp"
-    android:layout_height="50dp"
-    android:layout_centerInParent="true"
-    android:orientation="horizontal"
-    android:layout_marginTop="5dp">
-    <Button
-        android:onClick="clickInserisciAttivita"
-        android:layout_width="135dp"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="Inserisci"
-        android:textSize="@dimen/dimensione_testo_inserisci"
-        android:background="#0973de"/>
-    <Button
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_width="135dp"
-        android:layout_height="50dp"
-        android:layout_gravity="left"
-        android:onClick="clickBack"
-        android:text="back"
-        android:textSize="@dimen/dimensione_testo_inserisci"
-        android:background="#ef7a04"/>
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="265dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/gridLayout"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="135dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="#0973de"
+            android:onClick="clickInserisciAttivita"
+            android:text="Inserisci"
+            android:textSize="@dimen/dimensione_testo_inserisci" />
+
+        <Button
+            android:layout_width="135dp"
+            android:layout_height="50dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:background="#ef7a04"
+            android:onClick="clickBack"
+            android:text="back"
+            android:textSize="@dimen/dimensione_testo_inserisci" />
+
+    </LinearLayout>
 
 </RelativeLayout>

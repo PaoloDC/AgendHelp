@@ -8,6 +8,7 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -106,6 +108,8 @@ public class InserisciActivity extends AppCompatActivity {
     }
 
     public void clickData(View v) {
+        final LinearLayout ll = (LinearLayout) v;
+        ll.setBackgroundColor(Color.RED);
 
         selezionataDataOdierna = false;
 
@@ -128,18 +132,23 @@ public class InserisciActivity extends AppCompatActivity {
                         Date oggi = new Date();
 
                         Log.d(DEBUG, "Oggi: " + oggi + "\nData scelta: " + dataScelta);
+
                         if (sdf.format(oggi).equals(sdf.format(dataScelta))) {
                             Log.d(DEBUG, "Selezionata la data odierna");
                             selezionataDataOdierna = true;
                             tvData.setText(stringaData);
+
                         } else if (dataScelta.before(oggi)) {
                             Toast.makeText(InserisciActivity.this,
                                     "La data scelta è antecedente alla data attuale!",
                                     Toast.LENGTH_SHORT).show();
                             tvData.setText(testo_esempio);
+
                         } else {
                             tvData.setText(stringaData);
                         }
+
+                        ll.setBackgroundColor(Color.TRANSPARENT);
                     }
 
                 },
@@ -151,6 +160,9 @@ public class InserisciActivity extends AppCompatActivity {
     }
 
     public void clickOra(View v) {
+        final LinearLayout ll = (LinearLayout) v;
+        ll.setBackgroundColor(Color.RED);
+
         String testo = tvData.getText().toString();
         Log.d(DEBUG, testo + "            " + testo_esempio);
         if (testo.equals(testo_esempio)) {
@@ -164,12 +176,13 @@ public class InserisciActivity extends AppCompatActivity {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int oraSelezionata, int minutoSelezionato) {
 
-                        stringaOra = oraSelezionata + ":" + minutoSelezionato ;
+                        stringaOra = oraSelezionata + ":" + minutoSelezionato;
                         if (checkSelezioneOrario(stringaOra)) {
                             tvOra.setText(stringaOra);
                         } else {
                             tvOra.setText(testo_esempio);
                         }
+                        ll.setBackgroundColor(Color.TRANSPARENT);
                     }
                 },
                 Calendar.HOUR_OF_DAY,
@@ -186,28 +199,11 @@ public class InserisciActivity extends AppCompatActivity {
         String s2 = stringaOra.substring(x + 1);
 
         int oraSelezionata = Integer.parseInt(s1);
-        /*Toast*/
-      /*  Toast.makeText(InserisciActivity.this,
-                "Ora selezionata= " + oraSelezionata,
-                Toast.LENGTH_SHORT).show();*/
         int minutoSelezionato = Integer.parseInt(s2);
-        /*Toast*/
-       /* Toast.makeText(InserisciActivity.this,
-                "Minuto selezionata = " + minutoSelezionato,
-                Toast.LENGTH_SHORT).show();*/
 
         if (selezionataDataOdierna) {
             int oraAttuale = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-
-           /* Toast.makeText(InserisciActivity.this,
-                    "Ora attuale = " + oraAttuale,
-                    Toast.LENGTH_SHORT).show();*/
-            // oraAttuale++;
             int minutoAttuale = Calendar.getInstance().get(Calendar.MINUTE);
-
-            /*Toast.makeText(InserisciActivity.this,
-                    "Minuto attuale = " + minutoAttuale,
-                    Toast.LENGTH_SHORT).show();*/
 
             Log.d(DEBUG, "Ora Attuale: " + oraAttuale + " : " + minutoAttuale
                     + "\nOra Scelta: " + oraSelezionata + " : " + minutoSelezionato);
@@ -222,17 +218,18 @@ public class InserisciActivity extends AppCompatActivity {
                         "L'ora selezionata è antecedente all'ora attuale",
                         Toast.LENGTH_SHORT).show();
                 return false;
-            } else if(oraAttuale == oraSelezionata && minutoAttuale == minutoSelezionato) {
+            } else if (oraAttuale == oraSelezionata && minutoAttuale == minutoSelezionato) {
                 Toast.makeText(InserisciActivity.this,
                         "L'ora selezionata è uguale a quella inserita",
                         Toast.LENGTH_SHORT).show();
-
             }
         }
         return true;
     }
 
     public void clickRipetizione(View view) {
+        final LinearLayout ll = (LinearLayout) view;
+        ll.setBackgroundColor(Color.RED);
 
         // Creating and Building the Dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -248,6 +245,7 @@ public class InserisciActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 tvRipetizione.setText(ripetizione);
+                ll.setBackgroundColor(Color.TRANSPARENT);
             }
         });
 
@@ -256,6 +254,8 @@ public class InserisciActivity extends AppCompatActivity {
     }
 
     public void clickImportanza(View view) {
+        final LinearLayout ll = (LinearLayout) view;
+        ll.setBackgroundColor(Color.RED);
 
         final String[] scelte = {
                 "Bassa importanza",
@@ -265,12 +265,14 @@ public class InserisciActivity extends AppCompatActivity {
         // Creating and Building the Dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Importanza");
-        builder.setSingleChoiceItems(scelte, 1, new DialogInterface.OnClickListener() {
+        builder.setSingleChoiceItems(scelte, 0, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
-                if (item == 0)
+                if (item == 0) {
                     importanza = false;
-                else
+                } else {
                     importanza = true;
+                }
+
 
             }
         });
@@ -282,6 +284,7 @@ public class InserisciActivity extends AppCompatActivity {
                     tvImportanza.setText(scelte[1]);
                 else
                     tvImportanza.setText(scelte[0]);
+                ll.setBackgroundColor(Color.TRANSPARENT);
             }
         });
 
@@ -294,15 +297,20 @@ public class InserisciActivity extends AppCompatActivity {
                 //    "Suoneria attivata"
         };
 
+        final LinearLayout ll = (LinearLayout) view;
+        ll.setBackgroundColor(Color.RED);
+
         // Creating and Building the Dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Suoneria");
-        builder.setSingleChoiceItems(scelte, 1, new DialogInterface.OnClickListener() {
+        builder.setSingleChoiceItems(scelte, 0, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
-                if (item == 0)
+                if (item == 0) {
                     suoneria = false;
-                else
+                } else {
                     suoneria = true;
+                }
+
             }
         });
 
@@ -313,6 +321,7 @@ public class InserisciActivity extends AppCompatActivity {
                     tvSuoneria.setText(scelte[1]);
                 else
                     tvSuoneria.setText(scelte[0]);
+                ll.setBackgroundColor(Color.TRANSPARENT);
             }
         });
 
@@ -431,7 +440,7 @@ public class InserisciActivity extends AppCompatActivity {
             am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 120000, pi);
         } else {
             am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + getMilliSecondi(), pi);
-       }
+        }
     }
 
     /**
@@ -457,8 +466,6 @@ public class InserisciActivity extends AppCompatActivity {
         }
         return millis;
     }*/
-
-
     public long getMilliSecondi() {
         long millisDiff = 0;
 
@@ -472,16 +479,16 @@ public class InserisciActivity extends AppCompatActivity {
             int anno = c.get(Calendar.YEAR);
             int mese = c.get(Calendar.MONTH) + 1;
             int giorno = c.get(Calendar.DAY_OF_MONTH);
-            int ora = c.get(Calendar.HOUR_OF_DAY)  ;
+            int ora = c.get(Calendar.HOUR_OF_DAY);
             int minuti = c.get(Calendar.MINUTE);
             int secondi = c.get(Calendar.SECOND);
 
 
             String strDateOdierna = "" + anno + "/" + mese + "/" + giorno + " " + ora + ":" + minuti + ":" + secondi;
-                        Log.d(DEBUG,"msg: Stringaaaa dataaaaaaa ODIERNA=  "+ strDateOdierna);
+            Log.d(DEBUG, "msg: Stringaaaa dataaaaaaa ODIERNA=  " + strDateOdierna);
 
-            String strDateSelezionata = stringaData+" "+stringaOra+":"+secondi;
-                      Log.d(DEBUG,"msg: Stringaaaa dataaaaaaa SELEZIONATA "+ strDateSelezionata);
+            String strDateSelezionata = stringaData + " " + stringaOra + ":" + secondi;
+            Log.d(DEBUG, "msg: Stringaaaa dataaaaaaa SELEZIONATA " + strDateSelezionata);
 
 
             fmt.setLenient(false);
@@ -495,7 +502,7 @@ public class InserisciActivity extends AppCompatActivity {
             // Calculates the difference in milliseconds.
 
             millisDiff = d2.getTime() - d1.getTime();
-                    Log.d(DEBUG,"msg: MILLISECONDI "+ millisDiff);
+            Log.d(DEBUG, "msg: MILLISECONDI " + millisDiff);
 
             // Calculates days/hours/minutes/seconds.
 
