@@ -30,9 +30,9 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 /**
+ * Classe che modella l'attività che permette l'inserimento di un nuovo task da ricordare
  * Created by Paolo2 on 17/01/2018.
  */
-
 public class InserisciActivity extends AppCompatActivity {
 
     ArrayList<Attivita> listaAttivita = new ArrayList<>();
