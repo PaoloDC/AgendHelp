@@ -218,6 +218,11 @@ public class InserisciActivity extends AppCompatActivity {
                         "L'ora selezionata è antecedente all'ora attuale",
                         Toast.LENGTH_SHORT).show();
                 return false;
+            } else if (oraAttuale == oraSelezionata && minutoAttuale == minutoSelezionato) {
+                Toast.makeText(InserisciActivity.this,
+                        "L'ora  e il minuto sono uguali uguali a quelli  ",
+                        Toast.LENGTH_SHORT).show();
+                return false;
             }
         }
         return true;

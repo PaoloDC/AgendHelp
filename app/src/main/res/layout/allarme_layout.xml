@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:background="#FF0000"
+    android:background="#da0c0c"
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -17,8 +17,8 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="300dp"
-        android:layout_height="230dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_below="@id/linearImg"
         android:layout_marginLeft="15dp"
@@ -27,16 +27,18 @@
             android:id="@+id/tvOraEsatta"
             android:textAlignment="center"
             android:text="00"
-            android:textSize="50sp"
+            android:textSize="45dp"
+            android:textColor="#123455"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/tvMessaggioAllarme"
             android:textAlignment="center"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="15dp"
+            android:textColor="#123455"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ALLARME!!!"
+            android:text="Andare a lavoro "
             android:textSize="50dp" />
 
     </LinearLayout>
@@ -44,9 +46,10 @@
         android:background="#d6d6c2"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:text="Va bene maestro !"
+        android:text="Grazie ho capito !"
         android:textSize="50dp"
         android:onClick="clickEsci"
+        android:textColor="#1c1b1b"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
