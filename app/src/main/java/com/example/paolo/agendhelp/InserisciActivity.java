@@ -218,10 +218,6 @@ public class InserisciActivity extends AppCompatActivity {
                         "L'ora selezionata è antecedente all'ora attuale",
                         Toast.LENGTH_SHORT).show();
                 return false;
-            } else if (oraAttuale == oraSelezionata && minutoAttuale == minutoSelezionato) {
-                Toast.makeText(InserisciActivity.this,
-                        "L'ora selezionata è uguale a quella inserita",
-                        Toast.LENGTH_SHORT).show();
             }
         }
         return true;
@@ -433,39 +429,20 @@ public class InserisciActivity extends AppCompatActivity {
         AlarmManager am = (AlarmManager) this.getSystemService(ALARM_SERVICE);
 
 
-        //per simularlo
-        if (messaggio.contains("pillola")) {
+        //per simulare l'evento
+     /*   if (messaggio.contains("pillola")) {
             am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 60000, pi);
         } else if (messaggio.contains("spesa")) {
             am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 120000, pi);
-        } else {
+        } else {*/
             am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + getMilliSecondi(), pi);
-        }
+      //  }
     }
 
     /**
-     * Metodo che calcola il tempo dell'allarme in millisecondi
-     *
-     * @param //stringaData la data attuale
-     * @param //stringaOra  l'ora attuale
-     * @return un long corrispondente ai millisec del tempo dell'allarme
+     * funzione che calcola i millisecondi di differenza tra due date
+     * @return long millisecondi
      */
-  /*  public long calcolaTempo(String stringaData, String stringaOra) {
-
-        System.out.println("ELAPESED: " + SystemClock.elapsedRealtime());
-
-        long millis = 0;
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-            String mia = stringaData + " " + stringaOra;
-            Date miaData = sdf.parse(mia);
-            millis = miaData.getTime();
-            System.out.println("mia data: " + mia + "in millis:  " + millis);
-        } catch (ParseException e) {
-
-        }
-        return millis;
-    }*/
     public long getMilliSecondi() {
         long millisDiff = 0;
 
@@ -485,10 +462,10 @@ public class InserisciActivity extends AppCompatActivity {
 
 
             String strDateOdierna = "" + anno + "/" + mese + "/" + giorno + " " + ora + ":" + minuti + ":" + secondi;
-            Log.d(DEBUG, "msg: Stringaaaa dataaaaaaa ODIERNA=  " + strDateOdierna);
+            Log.d(DEBUG, "msg: Stringaaaa data ODIERNA=  " + strDateOdierna);
 
-            String strDateSelezionata = stringaData + " " + stringaOra + ":" + secondi;
-            Log.d(DEBUG, "msg: Stringaaaa dataaaaaaa SELEZIONATA " + strDateSelezionata);
+            String strDateSelezionata = stringaData + " " + stringaOra + ":" + "00";
+            Log.d(DEBUG, "msg: Stringaaaa data SELEZIONATA " + strDateSelezionata);
 
 
             fmt.setLenient(false);
@@ -515,17 +492,6 @@ public class InserisciActivity extends AppCompatActivity {
             int days = (int) (millisDiff / 86400000);
 
 
-
-              /*      System.out.println("Between " + strDate1 + " and " + strDate2 + " there are:");
-
-                    System.out.print(days + " days, ");
-
-                    System.out.print(hours + " hours, ");
-
-                    System.out.print(minutes + " minutes, ");
-
-                    System.out.println(seconds + " seconds");
-                    */
 
         } catch (Exception e) {
 

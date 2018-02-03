@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.paolo.agendhelp.MainActivity"
-    android:background="@drawable/sfondo">
+    android:background="@drawable/sfondo"
+    >
 
     <RelativeLayout
         android:id="@+id/relativeLayout1"
@@ -24,6 +25,7 @@
             android:textSize="25dp" />
         <TextView
             android:id="@+id/textNome"
+            android:layout_marginRight="5dp"
             android:layout_marginTop="15dp"
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
@@ -31,55 +33,76 @@
             android:textSize="23dp"
             android:textColor="#f9b600"
             />
+
     </RelativeLayout>
     <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/llNoAlarm"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_gravity="center"
+            android:src="@drawable/calendariodisegno"
+            android:layout_width="300px"
+            android:layout_height="300px" />
+
+        <TextView
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:text="Nessuna attività presente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <ListView
+        android:layout_marginTop="10dp"
+        android:id="@+id/mialista"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_below="@id/relativeLayout1"
+        />
+
+    <LinearLayout
+        android:layout_marginTop="15dp"
         android:id="@+id/bottoni"
-        android:layout_marginTop="80dp"
-        android:layout_marginLeft="50dp"
+        android:layout_marginBottom="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-        <ListView
-            android:id="@+id/mialista"
-            android:layout_marginTop="2dp"
-            android:layout_width="330dp"
-            android:layout_height="230dp"
-            android:layout_below="@id/relativeLayout1"
-            />
-        <LinearLayout
-            android:layout_marginTop="2dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <Button
+            android:textSize="25sp"
             android:layout_width="200dp"
-            android:layout_height="130dp"
-            android:orientation="vertical"
-            android:layout_marginLeft="15dp"
-            >
-            <Button
-                android:layout_width="200dp"
-                android:layout_height="40dp"
-                android:text="Aggiungi attività"
-                android:onClick="clickButtonInserisci"
-                android:background="#0973de"/>
+            android:layout_height="33dp"
+            android:text="Aggiungi attività"
+            android:onClick="clickButtonInserisci"
+            android:background="#0973de"/>
 
-            <Button
-                android:layout_marginTop="5dp"
-                android:layout_width="200dp"
-                android:layout_height="40dp"
-                android:text="Elimina  attività"
-                android:onClick="onClickElimina"
-                android:background="#f21c00"
-                />
-            <Button
-                android:text="ESCI"
-                android:layout_marginTop="5dp"
-                android:onClick="clickButtonEsci"
-                android:layout_width="200dp"
-                android:layout_height="40dp"
-                android:background="#ef7a04"
-                />
-        </LinearLayout>
+        <Button
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="200dp"
+            android:layout_height="33dp"
+            android:text="Elimina  attività"
+            android:onClick="onClickElimina"
+            android:background="#f21c00"
+            android:textSize="25sp"
+            />
 
-
+        <Button
+            android:text="ESCI"
+            android:onClick="clickButtonEsci"
+            android:layout_width="200dp"
+            android:layout_height="33dp"
+            android:background="#ef7a04"
+            android:textSize="25sp"
+            />
     </LinearLayout>
 
 
