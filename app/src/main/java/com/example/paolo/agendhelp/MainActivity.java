@@ -13,6 +13,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/**
+ * Created by Paolo on 11/01/2018.
+ */
 public class MainActivity extends AppCompatActivity {
 
     public static final String DEBUG = "DEBUG";
@@ -23,32 +26,6 @@ public class MainActivity extends AppCompatActivity {
     private static LinearLayout llNoAlarm;
 
     private static void checkAlarm() {
-/*
-        GregorianCalendar oggi = new GregorianCalendar();
-
-        for (int i = 0; i < customAdapter.getCount(); i++) {
-            Attivita a = customAdapter.getItem(i);
-            String[] orario = a.getOra().split(":");
-            int ora = Integer.parseInt(orario[0]);
-            int min = Integer.parseInt(orario[1]);
-
-            String[] data = a.getData().split("/");
-            int giorno = Integer.parseInt(data[0]);
-            int mese = Integer.parseInt(data[1]);
-            int anno = Integer.parseInt(data[2]);
-
-            GregorianCalendar gc = new GregorianCalendar(anno,mese,giorno,ora,min);
-
-            SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy : hh/mm");
-            String miadata = s.format(gc.getTime());
-            String moggi = s.format(gc.getTime());
-
-            System.out.println("miadata: " + miadata + ", " + moggi);
-
-            if (gc.before(oggi)){
-                customAdapter.remove(a);
-            }
-        }*/
 
         if (customAdapter.getCount() == 0) {
             llNoAlarm.setVisibility(View.VISIBLE);

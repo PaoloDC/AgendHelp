@@ -10,7 +10,7 @@ import java.util.Calendar;
 import java.util.TimeZone;
 
 /**
- * Created by Paolo2 on 18/01/2018.
+ * Created by Paolo on 18/01/2018.
  */
 
 public class Allarme extends Activity {

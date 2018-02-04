@@ -14,7 +14,6 @@ import java.util.List;
 /**
  * Created by Andrea95 on 17/01/2018.
  */
-
 public class CustomAdapter extends ArrayAdapter<Attivita> {
     private LayoutInflater inflater;
 

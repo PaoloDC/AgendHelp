@@ -12,7 +12,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
- * Created by Paolo2 on 23/01/2018.
+ * Created by Paolo on 23/01/2018.
  */
 
 public class GestoreFile {
