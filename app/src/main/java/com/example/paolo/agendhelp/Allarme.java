@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.TimeZone;
 
 /**
@@ -17,19 +16,18 @@ import java.util.TimeZone;
 public class Allarme extends Activity {
 
     public static final String MESSAGGIO = "MESSAGGIO";
-    public static final String TEMPO = "TEMPO";
+    private String nomeAttivita;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.allarme_layout);
 
-        String msg = getIntent().getStringExtra(MESSAGGIO);
-        long tempoAllarme = getIntent().getLongExtra(TEMPO,-1);
+        nomeAttivita = getIntent().getStringExtra(MESSAGGIO);
 
         TextView tvOraEsatta = findViewById(R.id.tvOraEsatta);
         TextView tvMessaggioAllarme = findViewById(R.id.tvMessaggioAllarme);
-        tvMessaggioAllarme.setText(msg);
+        tvMessaggioAllarme.setText(nomeAttivita);
 
        // SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
        // Date oggi = new Date(tempoAllarme);
@@ -45,13 +43,13 @@ public class Allarme extends Activity {
         int minuti = c.get(Calendar.MINUTE);
         int secondi = c.get(Calendar.SECOND);
 
-        String strDateOdierna = "" + anno + "/" + mese + "/" + giorno + " " + ora + ":" + minuti + ":" + secondi;
+        String strDateOdierna = giorno + "/" + mese + "/" + anno + " " + ora + ":" + minuti + ":" + secondi;
 
-        String attuale = strDateOdierna;
-        tvOraEsatta.setText(""+attuale);
+        tvOraEsatta.setText(strDateOdierna);
     }
 
     public void clickEsci(View view) {
+        MainActivity.eliminaAttivitaDaLista(nomeAttivita);
         finish();
     }
 

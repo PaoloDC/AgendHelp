@@ -32,7 +32,7 @@ public class CustomAdapter extends ArrayAdapter<Attivita> {
 
         // prendiamo dalla view, il contatto nella posizione position
         Attivita a = getItem(position);
-        Log.d("DEBUG", "Contatto in posizione " + position + a.toString());
+        Log.d("DEBUG", "attività in posizione: " + position + ", " + a.toString());
 
         TextView nome;
         TextView ora;

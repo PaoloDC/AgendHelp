@@ -17,13 +17,12 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String DEBUG = "DEBUG";
     private ListView lista;
-    private CustomAdapter customAdapter;
+    private static CustomAdapter customAdapter;
     private ArrayList<Attivita> daEliminare;
     public static String nomeAccount;
-    public LinearLayout llNoAlarm;
-   // ArrayList<Attivita> listaAttivita = new ArrayList<>();
+    private static LinearLayout llNoAlarm;
 
-    public void checkAlarm() {
+    private static void checkAlarm() {
 /*
         GregorianCalendar oggi = new GregorianCalendar();
 
@@ -175,5 +174,17 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
         finish();
+    }
+
+    public static void eliminaAttivitaDaLista(String nomeAttivita){
+        Log.d(DEBUG,"metodo elimina attivita da lista");
+        for(int i=0 ; i < customAdapter.getCount() ; i++){
+            Attivita a = customAdapter.getItem(i);
+            if(a.getNome().equals(nomeAttivita)){
+                customAdapter.remove(a);
+                break;
+            }
+        }
+        checkAlarm();
     }
 }

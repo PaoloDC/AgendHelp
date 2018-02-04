@@ -425,7 +425,6 @@ public class InserisciActivity extends AppCompatActivity {
         /*Funziona*/
         Intent i = new Intent(getApplicationContext(), Allarme.class);
         i.putExtra(Allarme.MESSAGGIO, messaggio);
-        i.putExtra(Allarme.TEMPO, getMilliSecondi());
         i.setAction(Intent.ACTION_MAIN);
         i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 
@@ -433,15 +432,9 @@ public class InserisciActivity extends AppCompatActivity {
         PendingIntent pi = PendingIntent.getActivity(getApplicationContext(), 0, i, 0);
         AlarmManager am = (AlarmManager) this.getSystemService(ALARM_SERVICE);
 
-
-        //per simulare l'evento
-     /*   if (messaggio.contains("pillola")) {
-            am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 60000, pi);
-        } else if (messaggio.contains("spesa")) {
-            am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 120000, pi);
-        } else {*/
-            am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + getMilliSecondi(), pi);
-      //  }
+        am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                SystemClock.elapsedRealtime() + getMilliSecondi(),
+                pi);
     }
 
     /**
